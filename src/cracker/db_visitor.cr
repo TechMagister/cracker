@@ -5,10 +5,14 @@ module Cracker
 
   class DbVisitor < Visitor
 
+    property current_file
+
+    @current_file : String
     @class_pop  = Hash(Crystal::ClassDef, Int32).new
     @module_pop = Hash(Crystal::ModuleDef, Int32).new
 
     def initialize(@db : Db)
+      @current_file = ""
     end
 
     def visit(node : Crystal::ModuleDef)
@@ -35,12 +39,12 @@ module Cracker
         end
       end
 
-      @db.push_class s.last
+      @db.push_class node
       true
     end
 
     def visit(node : Crystal::Def)
-      @db.push_def node if node.visibility == Crystal::Visibility::Public
+      @db.push_def node, current_file if node.visibility == Crystal::Visibility::Public
       false
     end
 

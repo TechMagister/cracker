@@ -10,8 +10,12 @@ Provide auto-completion for the crystal language ( racer like ) [WIP]
 [WIP]
 
 ``` shell
-$ cracker /path/to/crystal/source String#start
-["s_with?(str : String)","s_with?(char : Char)"]
+cracker /path/to/crystal/source String#start
+
+```
+
+``` json
+[{"name":"String#starts_with?(str : String)","file":"/home/arnaud/workspace/repos/crystal/src/string.cr","type":2,"signature":"def starts_with?(str : String)"},{"name":"String#starts_with?(char : Char)","file":"/home/arnaud/workspace/repos/crystal/src/string.cr","type":2,"signature":"def starts_with?(char : Char)"}]
 ```
 
 ## Development

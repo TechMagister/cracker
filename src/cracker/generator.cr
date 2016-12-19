@@ -30,6 +30,7 @@ module Cracker
 
     def parse(filename : String)
       node = Crystal::Parser.parse File.read(filename)
+      @visitor.current_file = filename
       node.transform @transformer
     end
 

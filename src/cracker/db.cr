@@ -1,14 +1,32 @@
+require "json"
+
 module Cracker
+
+  enum EntryType
+    Module
+    Class
+    Function
+  end
+
+  struct DbEntry
+    JSON.mapping(
+      name: String,
+      file: String,
+      type: EntryType,
+      signature: String
+    )
+
+    def initialize(@name : String, node : Crystal::Def, @file : String, @type = EntryType::Function)
+      @signature = node.to_s.partition("\n")[0]
+    end
+
+  end
 
   class Db
 
-    @raw_storage = Array(String).new
+    @raw_storage = Array(DbEntry).new
 
     @path_stack = Array(String).new
-
-
-    def initialize
-    end
 
     def debug
       @raw_storage.each do |func|
@@ -17,14 +35,14 @@ module Cracker
     end
 
     def starts_with(pattern : String)
-      res = Array(String).new
+      res = Array(DbEntry).new
       lookfor_class = pattern.ends_with? "::"
       @raw_storage.each do |entry|
-        if entry.starts_with?(pattern)
+        if entry.name.starts_with?(pattern)
           if !lookfor_class
-            res << entry[pattern.size..-1]
+            res << entry
           else
-            res << entry[pattern.size..(entry.index("#") || 0)-1]
+            res << entry
           end
         end
       end
@@ -35,15 +53,15 @@ module Cracker
       @path_stack << name
     end
 
-    def push_class(name : String)
-      @path_stack << name
+    def push_class(node : Crystal::ClassDef)
+      @path_stack << node.name.to_s.split("::").last
     end
 
-    def push_def(func : Crystal::Def)
+    def push_def(func : Crystal::Def, file : String)
       full = @path_stack.join("::") + "##{func.name}(#{func.args.join(',')})"
       full += ": #{func.return_type}" if func.return_type
 
-      @raw_storage << full
+      @raw_storage << DbEntry.new full, func, file
     end
 
     def pop_module
