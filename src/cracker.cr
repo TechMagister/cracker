@@ -8,4 +8,4 @@ generator = Cracker::Generator.new [path]
 
 db = generator.db
 
-puts db.starts_with(exp).to_json
+puts db.starts_with(exp).to_pretty_json

@@ -13,14 +13,31 @@ Provide auto-completion for the crystal language ( racer like ) [WIP]
 cracker /path/to/crystal/source String#start
 
 ```
-
+Output :
 ``` json
-[{"name":"String#starts_with?(str : String)","file":"/home/arnaud/workspace/repos/crystal/src/string.cr","type":2,"signature":"def starts_with?(str : String)"},{"name":"String#starts_with?(char : Char)","file":"/home/arnaud/workspace/repos/crystal/src/string.cr","type":2,"signature":"def starts_with?(char : Char)"}]
+[
+  {
+    "name": "String#starts_with?(str : String)",
+    "file": "/home/arnaud/workspace/repos/crystal/src/string.cr",
+    "type": 2,
+    "signature": "def starts_with?(str : String)"
+  },
+  {
+    "name": "String#starts_with?(char : Char)",
+    "file": "/home/arnaud/workspace/repos/crystal/src/string.cr",
+    "type": 2,
+    "signature": "def starts_with?(char : Char)"
+  }
+]
 ```
 
 ## Development
 
-TODO: Write development instructions here
+- [x] Allow to search using starts_with?
+- [ ] Add line number to the result
+- [ ] Replate type by a string
+- [ ] Daemonize
+- [ ] Give a file, line number and character number to complete with the context ?
 
 ## Contributing
 
