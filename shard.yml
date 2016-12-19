@@ -1,0 +1,17 @@
+name: cracker
+version: 0.1.0
+
+authors:
+  - Arnaud Fernandés <arnaud.fernandes@laposte.net>
+
+targets:
+  cracker:
+    main: src/cracker.cr
+
+crystal: 0.20.1+68
+
+license: MIT
+
+dependencies:
+  cli:
+    github: mosop/cli
