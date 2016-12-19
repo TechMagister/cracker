@@ -6,18 +6,23 @@ module Cracker
     Module
     Class
     Function
+    def to_json(io)
+      io << to_s
+    end
   end
 
   struct DbEntry
     JSON.mapping(
       name: String,
       file: String,
+      location: String?,
       type: EntryType,
       signature: String
     )
 
     def initialize(@name : String, node : Crystal::Def, @file : String, @type = EntryType::Function)
       @signature = node.to_s.partition("\n")[0]
+      @location = node.location.to_s if node.location
     end
 
   end

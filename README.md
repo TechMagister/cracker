@@ -34,8 +34,8 @@ Output :
 ## Development
 
 - [x] Allow to search using starts_with?
-- [ ] Add line number to the result
-- [ ] Replate type by a string
+- [x] Add line number to the result
+- [x] Replate type by a string
 - [ ] Daemonize
 - [ ] Give a file, line number and character number to complete with the context ?
 
