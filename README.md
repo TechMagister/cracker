@@ -1,14 +1,17 @@
 # cracker
 
-TODO: Write a description here
+Provide auto-completion for the crystal language ( racer like ) [WIP]
 
 ## Installation
 
-TODO: Write installation instructions here
+[WIP]
 
 ## Usage
+[WIP] Do not use
 
-TODO: Write usage instructions here
+``` shell
+$ cracker /path/to/crystal/source String#begins
+```
 
 ## Development
 
@@ -16,7 +19,7 @@ TODO: Write development instructions here
 
 ## Contributing
 
-1. Fork it ( https://github.com/[your-github-name]/cracker/fork )
+1. Fork it ( https://github.com/TechMagister/cracker/fork )
 2. Create your feature branch (git checkout -b my-new-feature)
 3. Commit your changes (git commit -am 'Add some feature')
 4. Push to the branch (git push origin my-new-feature)
@@ -24,4 +27,4 @@ TODO: Write development instructions here
 
 ## Contributors
 
-- [[your-github-name]](https://github.com/[your-github-name]) Arnaud Fernandés - creator, maintainer
+- [TechMagister](https://github.com/TechMagister) Arnaud Fernandés - creator, maintainer
