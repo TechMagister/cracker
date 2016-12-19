@@ -47,11 +47,11 @@ module Cracker
     end
 
     def pop_module
-      @path_stack.pop
+      @path_stack.pop?
     end
 
     def pop_class
-      @path_stack.pop
+      @path_stack.pop?
     end
 
   end

@@ -5,22 +5,36 @@ module Cracker
 
   class DbVisitor < Visitor
 
-    @class_pop_module = 0
+    @class_pop  = Hash(Crystal::ClassDef, Int32).new
+    @module_pop = Hash(Crystal::ModuleDef, Int32).new
 
     def initialize(@db : Db)
     end
 
     def visit(node : Crystal::ModuleDef)
-      @db.push_module node.name.to_s
+      ns = node.name.to_s.split "::"
+      @module_pop[node] = ns.size
+
+      if ns.size > 1
+        ns[0..-2].each do |namespace|
+          @db.push_module namespace
+        end
+      end
+
+      @db.push_module ns.last
       true
     end
 
     def visit(node : Crystal::ClassDef)
       s = node.name.to_s.split "::"
-      @class_pop_module = s.size-1
-      0.upto(s.size-2) do |i|
-        @db.push_module s[i]
+      @class_pop[node] = s.size - 1
+
+      if s.size > 1
+        s[0..-2].each do |namespace|
+          @db.push_module namespace
+        end
       end
+
       @db.push_class s.last
       true
     end
@@ -35,11 +49,15 @@ module Cracker
     end
 
     def end_visit(node : Crystal::ModuleDef)
-      @db.pop_module
+      times = @module_pop[node]
+      times.times do |_|
+        @db.pop_module
+      end
+      @module_pop.delete node
     end
 
     def end_visit(node : Crystal::ClassDef)
-      @class_pop_module.times do |i|
+      @class_pop[node].times do |_|
         @db.pop_module
       end
       @db.pop_class

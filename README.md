@@ -7,10 +7,11 @@ Provide auto-completion for the crystal language ( racer like ) [WIP]
 [WIP]
 
 ## Usage
-[WIP] Do not use
+[WIP]
 
 ``` shell
-$ cracker /path/to/crystal/source String#begins
+$ cracker /path/to/crystal/source String#start
+["s_with?(str : String)","s_with?(char : Char)"]
 ```
 
 ## Development
