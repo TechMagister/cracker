@@ -20,14 +20,14 @@ Output :
     "name": "String#starts_with?(str : String)",
     "file": "/home/arnaud/workspace/repos/crystal/src/string.cr",
     "location": ":3261:3",
-    "type": Function,
+    "type": "Function",
     "signature": "def starts_with?(str : String)"
   },
   {
     "name": "String#starts_with?(char : Char)",
     "file": "/home/arnaud/workspace/repos/crystal/src/string.cr",
     "location": ":3266:3",
-    "type": Function,
+    "type": "Function",
     "signature": "def starts_with?(char : Char)"
   }
 ]

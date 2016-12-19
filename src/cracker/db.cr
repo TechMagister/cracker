@@ -7,7 +7,7 @@ module Cracker
     Class
     Function
     def to_json(io)
-      io << to_s
+      io << '"' << to_s << '"'
     end
   end
 
