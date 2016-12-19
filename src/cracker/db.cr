@@ -18,10 +18,17 @@ module Cracker
 
     def starts_with(pattern : String)
       res = Array(String).new
+      lookfor_class = pattern.ends_with? "::"
       @raw_storage.each do |entry|
-        res << entry[pattern.size..-1] if entry.starts_with?(pattern)
+        if entry.starts_with?(pattern)
+          if !lookfor_class
+            res << entry[pattern.size..-1]
+          else
+            res << entry[pattern.size..(entry.index("#") || 0)-1]
+          end
+        end
       end
-      res
+      res.uniq
     end
 
     def push_module(name : String)

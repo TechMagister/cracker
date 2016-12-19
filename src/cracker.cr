@@ -1,17 +1,9 @@
 require "./cracker/*"
 
-require "compiler/crystal/syntax"
+path = ARGV[0]
 
-file = ARGV[0]
+generator = Cracker::Generator.new [path]
 
-raise "File does not exists" if !File.exists?(file)
+db = generator.db
 
-node = Crystal::Parser.parse File.read(file)
-
-db = Cracker::Db.new
-visitor = Cracker::DbVisitor.new db
-transformer = Cracker::Transformer.new visitor
-
-node.transform transformer
-
-puts db.starts_with "Cracker::Db#push"
+puts db.starts_with "Cracker::"
