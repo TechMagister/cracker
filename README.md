@@ -4,13 +4,21 @@ Provide auto-completion for the crystal language ( racer like ) [WIP]
 
 ## Installation
 
-[WIP]
+- Clone the repository
+- Build
+- Copy the binary to your $PATH
 
 ## Usage
-[WIP]
+Start the server
 
 ``` shell
-cracker /path/to/crystal/source String#start
+cracker server /path/to/crystal/source
+```
+
+And query :
+
+``` shell
+cracker client --starts-with String#starts
 
 ```
 Output :
@@ -18,14 +26,14 @@ Output :
 [
   {
     "name": "String#starts_with?(str : String)",
-    "file": "/home/arnaud/workspace/repos/crystal/src/string.cr",
+    "file": "/path/to/crystal/source/string.cr",
     "location": ":3261:3",
     "type": "Function",
     "signature": "def starts_with?(str : String)"
   },
   {
     "name": "String#starts_with?(char : Char)",
-    "file": "/home/arnaud/workspace/repos/crystal/src/string.cr",
+    "file": "/path/to/crystal/source/string.cr",
     "location": ":3266:3",
     "type": "Function",
     "signature": "def starts_with?(char : Char)"
@@ -33,13 +41,16 @@ Output :
 ]
 ```
 
+TODO : Integration with IDEs ( emacs first :) )
+
 ## Development
 
 - [x] Allow to search using starts_with?
 - [x] Add line number to the result
 - [x] Replate type by a string
-- [ ] Daemonize
-- [ ] Give a file, line number and character number to complete with the context ?
+- [x] Daemonize
+- [ ] Append new source path for completion ( project path for instance )
+- [ ] Give a file path to the server, line number and character number to complete with the context ?
 
 ## Contributing
 

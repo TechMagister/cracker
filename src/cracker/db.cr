@@ -1,11 +1,11 @@
 require "json"
 
 module Cracker
-
   enum EntryType
     Module
     Class
     Function
+
     def to_json(io)
       io << '"' << to_s << '"'
     end
@@ -24,11 +24,9 @@ module Cracker
       @signature = node.to_s.partition("\n")[0]
       @location = node.location.to_s if node.location
     end
-
   end
 
   class Db
-
     @raw_storage = Array(DbEntry).new
 
     @path_stack = Array(String).new
@@ -39,7 +37,7 @@ module Cracker
       end
     end
 
-    def starts_with(pattern : String)
+    def starts_with?(pattern : String)
       res = Array(DbEntry).new
       lookfor_class = pattern.ends_with? "::"
       @raw_storage.each do |entry|
@@ -76,7 +74,5 @@ module Cracker
     def pop_class
       @path_stack.pop?
     end
-
   end
-
 end

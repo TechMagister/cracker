@@ -2,13 +2,11 @@ require "./visitor"
 require "./db"
 
 module Cracker
-
   class DbVisitor < Visitor
-
     property current_file
 
     @current_file : String
-    @class_pop  = Hash(Crystal::ClassDef, Int32).new
+    @class_pop = Hash(Crystal::ClassDef, Int32).new
     @module_pop = Hash(Crystal::ModuleDef, Int32).new
 
     def initialize(@db : Db)
@@ -70,8 +68,5 @@ module Cracker
     def visit(node)
       false
     end
-
-
   end
-
 end

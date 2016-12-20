@@ -4,9 +4,7 @@ require "./db"
 require "./db_visitor"
 
 module Cracker
-
   class Generator
-
     getter db
 
     @db : Db
@@ -33,7 +31,5 @@ module Cracker
       @visitor.current_file = filename
       node.transform @transformer
     end
-
   end
-
 end

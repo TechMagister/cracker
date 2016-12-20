@@ -1,9 +1,7 @@
 require "./db_visitor"
 
 module Cracker
-
   class Transformer < Crystal::Transformer
-
     def initialize(@visitor : Cracker::DbVisitor)
     end
 
@@ -11,5 +9,4 @@ module Cracker
       @visitor.accept node
     end
   end
-
 end

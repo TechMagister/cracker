@@ -8,6 +8,10 @@ shards:
     github: mosop/cli
     version: 0.5.1.5
 
+  msgpack:
+    github: benoist/msgpack-crystal
+    commit: 8ecde2ede883510e784ccb47762ef95a53640c15
+
   optarg:
     github: mosop/optarg
     version: 0.4.2.9
