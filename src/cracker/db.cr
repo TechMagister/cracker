@@ -61,7 +61,8 @@ module Cracker
     end
 
     def push_def(func : Crystal::Def, file : String)
-      full = @path_stack.join("::") + "##{func.name}(#{func.args.join(',')})"
+      func_sep = (func.receiver ? "." : "#")
+      full = @path_stack.join("::") + "#{func_sep}#{func.name}(#{func.args.join(',')})"
       full += ": #{func.return_type}" if func.return_type
 
       @raw_storage << DbEntry.new full, func, file

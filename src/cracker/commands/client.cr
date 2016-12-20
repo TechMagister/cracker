@@ -14,7 +14,8 @@ module Cracker::Commands
 
       class Options
         string "-p", desc: "Server port", default: "1234"
-        string "--starts-with", desc: "Like the name says"
+        string "--starts-with", desc: "format : Class#method for instance method\n" +
+                                      "         Class.method for class method"
         string "--add-path", desc: "Source path to add to completion database"
         bool "--stop-server", desc: "Stop the server"
         help

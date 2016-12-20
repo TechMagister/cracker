@@ -18,30 +18,106 @@ cracker server /path/to/crystal/source
 And query :
 
 ``` shell
-cracker client --starts-with String#starts
-
+$ cracker client --help
+Options:
+  --add-path     Source path to add to completion database
+  -p             Server port
+                 (default: 1234)
+  --starts-with  format : Class#method for instance method
+                          Class.method for class method
+  --stop-server  Stop the server
+  -h, --help     show this help
 ```
-Output :
+
+Example :
+
+``` shell
+$ cracker client --starts-with Array.e
+```
+Outputs all the Array class methods starting with e :
 ``` json
-[
-  {
-    "name": "String#starts_with?(str : String)",
-    "file": "/path/to/crystal/source/string.cr",
-    "location": ":3261:3",
-    "type": "Function",
-    "signature": "def starts_with?(str : String)"
-  },
-  {
-    "name": "String#starts_with?(char : Char)",
-    "file": "/path/to/crystal/source/string.cr",
-    "location": ":3266:3",
-    "type": "Function",
-    "signature": "def starts_with?(char : Char)"
-  }
-]
+{
+  "status": "success",
+  "results": [
+    {
+      "name": "Array.each_product(arrays)",
+      "file": "/path/to/crystal/source/array.cr",
+      "location": ":1138:3",
+      "type": "Function",
+      "signature": "def self.each_product(arrays)"
+    },
+    {
+      "name": "Array.each_product(arrays : Array)",
+      "file": "/path/to/crystal/source/array.cr",
+      "location": ":1162:3",
+      "type": "Function",
+      "signature": "def self.each_product(*arrays : Array)"
+    }
+  ]
+}
 ```
 
-TODO : Integration with IDEs ( emacs first :) )
+```
+$ cracker client --starts-with Array#e
+```
+Outputs all the Array instance methods starting with e :
+
+``` json
+{
+  "status": "success",
+  "results": [
+    {
+      "name": "Array#each_permutation(size : Int = self.size)",
+      "file": "/path/to/crystal/source/array.cr",
+      "location": ":964:3",
+      "type": "Function",
+      "signature": "def each_permutation(size : Int = self.size)"
+    },
+    {
+      "name": "Array#each_permutation(size : Int = self.size)",
+      "file": "/path/to/crystal/source/array.cr",
+      "location": ":1009:3",
+      "type": "Function",
+      "signature": "def each_permutation(size : Int = self.size)"
+    },
+    {
+      "name": "Array#each_combination(size : Int = self.size)",
+      "file": "/path/to/crystal/source/array.cr",
+      "location": ":1023:3",
+      "type": "Function",
+      "signature": "def each_combination(size : Int = self.size)"
+    },
+    {
+      "name": "Array#each_combination(size : Int = self.size)",
+      "file": "/path/to/crystal/source/array.cr",
+      "location": ":1059:3",
+      "type": "Function",
+      "signature": "def each_combination(size : Int = self.size)"
+    },
+    {
+      "name": "Array#each_repeated_combination(size : Int = self.size)",
+      "file": "/path/to/crystal/source/array.cr",
+      "location": ":1087:3",
+      "type": "Function",
+      "signature": "def each_repeated_combination(size : Int = self.size)"
+    },
+    {
+      "name": "Array#each_repeated_combination(size : Int = self.size)",
+      "file": "/path/to/crystal/source/array.cr",
+      "location": ":1120:3",
+      "type": "Function",
+      "signature": "def each_repeated_combination(size : Int = self.size)"
+    },
+    {
+      "name": "Array#each_repeated_permutation(size : Int = self.size)",
+      "file": "/path/to/crystal/source/array.cr",
+      "location": ":1176:3",
+      "type": "Function",
+      "signature": "def each_repeated_permutation(size : Int = self.size)"
+    }
+  ]
+}
+```
 
 ## Development
 
@@ -49,8 +125,8 @@ TODO : Integration with IDEs ( emacs first :) )
 - [x] Add line number to the result
 - [x] Replate type by a string
 - [x] Daemonize
-- [ ] Append new source path for completion ( project path for instance )
-- [ ] Give a file path to the server, line number and character number to complete with the context ?
+- [x] Append new source path for completion ( project path for instance )
+- [ ] IDE integration
 
 ## Contributing
 
