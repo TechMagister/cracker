@@ -1,14 +1,16 @@
 require "socket"
 
 require "./db"
-require "./server/messages"
+require "./messages/messages"
 
 module Cracker
   class Server
     @db : Db
+    @hostname : String
+    @port : Int32
     @exit = false
 
-    def initialize(@db : Db)
+    def initialize(@db : Db, @hostname : String, @port : Int32)
     end
 
     def process(message : String)
@@ -24,8 +26,8 @@ module Cracker
     end
 
     def run
-      server = TCPServer.new("localhost", 1234)
-      puts "Listening on port 1234"
+      server = TCPServer.new(@hostname, @port)
+      puts "Listening on port #{@port}"
       loop do
         server.accept do |client|
           message = client.gets

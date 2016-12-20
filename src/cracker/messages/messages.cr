@@ -15,6 +15,10 @@ module Cracker::Messages
 
     def initialize(@type, @content)
     end
+
+    def self.match_command(content : String)
+      new CommandType::Match, content
+    end
   end
 
   struct Result

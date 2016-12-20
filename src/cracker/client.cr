@@ -1,6 +1,6 @@
 require "socket"
 
-require "./server/messages"
+require "./messages/messages"
 
 module Cracker
   class Client
