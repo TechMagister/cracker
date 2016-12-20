@@ -18,10 +18,17 @@ module Cracker
 
       case cmd.type
       when Messages::CommandType::Match
-        @db.starts_with?(cmd.content).to_json
+        {status: "success", results: @db.starts_with?(cmd.content)}.to_json
+      when Messages::CommandType::AddPath
+        if Dir.exists? cmd.content
+          files = Generator.add_paths @db, [cmd.content]
+          {status: "success", message: "#{files} files processed"}.to_json
+        else
+          {status: "error", message: "#{cmd.content} folder does not exists."}.to_json
+        end
       when Messages::CommandType::Exit
         @exit = true
-        "Exit".to_json
+        {status: "success", message: "Completion server stoped"}.to_json
       end
     end
 
@@ -32,8 +39,8 @@ module Cracker
         server.accept do |client|
           message = client.gets
           client << process(message) if message
-          break if @exit
         end
+        break if @exit
       end
     end
   end

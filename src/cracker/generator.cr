@@ -6,13 +6,27 @@ require "./db_visitor"
 module Cracker
   class Generator
     getter db
+    getter processed_files
 
     @db : Db
     @visitor : DbVisitor
     @transformer : Transformer
 
+    @processed_files = 0
+
+    def self.add_paths(db : Db, paths : Array(String))
+      gen = Generator.new db, paths
+      gen.processed_files
+    end
+
     def initialize(@paths : Array(String))
       @db = Db.new
+      @visitor = DbVisitor.new @db
+      @transformer = Transformer.new @visitor
+      compute_paths
+    end
+
+    def initialize(@db : Db, @paths : Array(String))
       @visitor = DbVisitor.new @db
       @transformer = Transformer.new @visitor
       compute_paths
@@ -27,6 +41,7 @@ module Cracker
     end
 
     def parse(filename : String)
+      @processed_files += 1
       node = Crystal::Parser.parse File.read(filename)
       @visitor.current_file = filename
       node.transform @transformer

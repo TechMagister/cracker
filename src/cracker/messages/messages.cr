@@ -4,6 +4,7 @@ require "../db"
 module Cracker::Messages
   enum CommandType
     Match =  0
+    AddPath
     Exit  = 99
   end
 
@@ -19,6 +20,15 @@ module Cracker::Messages
     def self.match_command(content : String)
       new CommandType::Match, content
     end
+
+    def self.add_path_command(path : String)
+      new CommandType::AddPath, path
+    end
+
+    def self.exit_command
+      new CommandType::Exit, ""
+    end
+
   end
 
   struct Result
