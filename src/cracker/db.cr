@@ -37,7 +37,31 @@ module Cracker
       end
     end
 
-    def starts_with?(pattern : String)
+    def with_context(ctx : String) : Array(DbEntry)
+      content = ""
+      (ctx.size-1).downto 0 do |i|
+        char = ctx[i]
+        break unless char.to_s.match /[@\w\.]/
+        content += char
+      end
+      split = content.reverse.split '.'
+
+      varname = split[0]?
+      func = split[1]? || ""
+
+      res = Array(DbEntry).new
+
+      if varname
+        if match = ctx.match /#{varname} : (?<type>[A-Za-z]+)/
+          pattern = match["type"] + "#" + func
+          res = starts_with? pattern
+        end
+      end
+
+      res
+    end
+
+    def starts_with?(pattern : String) : Array(DbEntry)
       res = Array(DbEntry).new
       lookfor_class = pattern.ends_with? "::"
       @raw_storage.each do |entry|

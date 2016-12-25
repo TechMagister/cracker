@@ -15,7 +15,8 @@ module Cracker::Commands
       class Options
         string "-p", desc: "Server port", default: "1234"
         string "--starts-with", desc: "format : Class#method for instance method\n" +
-                                      "         Class.method for class method"
+                                "         Class.method for class method"
+        bool "--context", desc: "Take a context in stdin"
         string "--add-path", desc: "Source path to add to completion database"
         bool "--stop-server", desc: "Stop the server"
         help
@@ -31,7 +32,7 @@ module Cracker::Commands
 
       def validate
         error! "Invalid port" unless port?
-        if !(options.starts_with? || options.add_path? || options.stop_server?)
+        if !(options.starts_with? || options.add_path? || options.stop_server? || options.context?)
           error! "You should specify at least one option"
         end
       end
@@ -46,6 +47,10 @@ module Cracker::Commands
                   MessageBuilder.add_path options.add_path
                 elsif options.stop_server?
                   MessageBuilder.stop_server
+                elsif options.context?
+                  ctx = STDIN.gets '\0' || " "
+                  ctx = ctx.not_nil![0...-1]
+                  MessageBuilder.context ctx
                 else
                   nil
                 end

@@ -16,6 +16,10 @@ module Cracker
       Messages::Command.exit_command
     end
 
+    def self.context(content : String)
+      Messages::Command.context_command content
+    end
+
   end
 
 end

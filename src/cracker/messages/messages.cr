@@ -5,6 +5,7 @@ module Cracker::Messages
   enum CommandType
     Match =  0
     AddPath
+    Context
     Exit  = 99
   end
 
@@ -27,6 +28,10 @@ module Cracker::Messages
 
     def self.exit_command
       new CommandType::Exit, ""
+    end
+
+    def self.context_command(content : String)
+      new CommandType::Context, content
     end
 
   end

@@ -10,6 +10,10 @@ module Cracker
     @port : Int32
     @exit = false
 
+    macro success(results)
+      {status: "success", results: {{results}}}.to_json
+    end
+
     def initialize(@db : Db, @hostname : String, @port : Int32)
     end
 
@@ -18,7 +22,7 @@ module Cracker
 
       case cmd.type
       when Messages::CommandType::Match
-        {status: "success", results: @db.starts_with?(cmd.content)}.to_json
+        success(@db.starts_with?(cmd.content))
       when Messages::CommandType::AddPath
         if Dir.exists? cmd.content
           files = Generator.add_paths @db, [cmd.content]
@@ -29,6 +33,9 @@ module Cracker
       when Messages::CommandType::Exit
         @exit = true
         {status: "success", message: "Completion server stoped"}.to_json
+      when Messages::CommandType::Context
+        res = @db.with_context cmd.content
+        success res
       end
     end
 

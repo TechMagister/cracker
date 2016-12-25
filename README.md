@@ -25,6 +25,7 @@ Options:
                  (default: 1234)
   --starts-with  format : Class#method for instance method
                           Class.method for class method
+  --context      Take a context in stdin
   --stop-server  Stop the server
   -h, --help     show this help
 ```
@@ -73,41 +74,7 @@ Outputs all the Array instance methods starting with e :
       "type": "Function",
       "signature": "def each_permutation(size : Int = self.size)"
     },
-    {
-      "name": "Array#each_permutation(size : Int = self.size)",
-      "file": "/path/to/crystal/source/array.cr",
-      "location": ":1009:3",
-      "type": "Function",
-      "signature": "def each_permutation(size : Int = self.size)"
-    },
-    {
-      "name": "Array#each_combination(size : Int = self.size)",
-      "file": "/path/to/crystal/source/array.cr",
-      "location": ":1023:3",
-      "type": "Function",
-      "signature": "def each_combination(size : Int = self.size)"
-    },
-    {
-      "name": "Array#each_combination(size : Int = self.size)",
-      "file": "/path/to/crystal/source/array.cr",
-      "location": ":1059:3",
-      "type": "Function",
-      "signature": "def each_combination(size : Int = self.size)"
-    },
-    {
-      "name": "Array#each_repeated_combination(size : Int = self.size)",
-      "file": "/path/to/crystal/source/array.cr",
-      "location": ":1087:3",
-      "type": "Function",
-      "signature": "def each_repeated_combination(size : Int = self.size)"
-    },
-    {
-      "name": "Array#each_repeated_combination(size : Int = self.size)",
-      "file": "/path/to/crystal/source/array.cr",
-      "location": ":1120:3",
-      "type": "Function",
-      "signature": "def each_repeated_combination(size : Int = self.size)"
-    },
+...
     {
       "name": "Array#each_repeated_permutation(size : Int = self.size)",
       "file": "/path/to/crystal/source/array.cr",
@@ -117,6 +84,61 @@ Outputs all the Array instance methods starting with e :
     }
   ]
 }
+```
+
+``` shell
+$ echo "@test : String\n@test.to_f" | cracker client --context
+```
+
+``` json
+{
+    "status": "success",
+    "results": [
+        {
+            "name": "String#to_f(whitespace = true,strict = true)",
+            "file": "/home/arnaud/workspace/repos/crystal/src/string.cr",
+            "location": ":608:3",
+            "type": "Function",
+            "signature": "def to_f(whitespace = true, strict = true)"
+        },
+        {
+            "name": "String#to_f?(whitespace = true,strict = true)",
+            "file": "/home/arnaud/workspace/repos/crystal/src/string.cr",
+            "location": ":626:3",
+            "type": "Function",
+            "signature": "def to_f?(whitespace = true, strict = true)"
+        },
+        {
+            "name": "String#to_f32(whitespace = true,strict = true)",
+            "file": "/home/arnaud/workspace/repos/crystal/src/string.cr",
+            "location": ":631:3",
+            "type": "Function",
+            "signature": "def to_f32(whitespace = true, strict = true)"
+        },
+        {
+            "name": "String#to_f32?(whitespace = true,strict = true)",
+            "file": "/home/arnaud/workspace/repos/crystal/src/string.cr",
+            "location": ":636:3",
+            "type": "Function",
+            "signature": "def to_f32?(whitespace = true, strict = true)"
+        },
+        {
+            "name": "String#to_f64(whitespace = true,strict = true)",
+            "file": "/home/arnaud/workspace/repos/crystal/src/string.cr",
+            "location": ":644:3",
+            "type": "Function",
+            "signature": "def to_f64(whitespace = true, strict = true)"
+        },
+        {
+            "name": "String#to_f64?(whitespace = true,strict = true)",
+            "file": "/home/arnaud/workspace/repos/crystal/src/string.cr",
+            "location": ":649:3",
+            "type": "Function",
+            "signature": "def to_f64?(whitespace = true, strict = true)"
+        }
+    ]
+}
+
 ```
 
 ## Development
