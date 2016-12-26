@@ -24,7 +24,11 @@ module Cracker
       @signature = node.to_s.partition("\n")[0]
       @location = node.location.to_s if node.location
     end
+
+    def_equals_and_hash @signature
   end
+
+  TYPE_REGEXP = /(?<type>[A-Z][\w]+)(?:\(.+\))?\.new/
 
   class Db
     @raw_storage = Array(DbEntry).new
@@ -41,10 +45,11 @@ module Cracker
       content = ""
       (ctx.size-1).downto 0 do |i|
         char = ctx[i]
-        break unless char.to_s.match /[@\w\.]/
+        break unless char.to_s.match /[@A-Za-z_\.]/
         content += char
       end
-      split = content.reverse.split '.'
+      content = content.reverse
+      split = content.split '.'
 
       varname = split[0]?
       func = split[1]? || ""
@@ -52,7 +57,13 @@ module Cracker
       res = Array(DbEntry).new
 
       if varname
-        if match = ctx.match /#{varname} : (?<type>[A-Za-z]+)/
+        if varname.match(/^[A-Z]/)
+          pattern = varname + '.' + func
+          res = starts_with? pattern
+        elsif match = ctx.match /#{varname} = #{TYPE_REGEXP}/
+          pattern = match["type"] + '#' + func
+          res = starts_with? pattern
+        elsif match = ctx.match /#{varname} : (?<type>[A-Za-z]+)/
           pattern = match["type"] + "#" + func
           res = starts_with? pattern
         end
