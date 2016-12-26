@@ -25,8 +25,12 @@ module Cracker
         success(@db.starts_with?(cmd.content))
       when Messages::CommandType::AddPath
         if Dir.exists? cmd.content
-          files = Generator.add_paths @db, [cmd.content]
-          {status: "success", message: "#{files} files processed"}.to_json
+          begin
+            files = Generator.add_paths @db, [cmd.content]
+            {status: "success", message: "#{files} files processed"}.to_json
+          rescue e
+            {status: "error", message: e.to_s}.to_json
+          end
         else
           {status: "error", message: "#{cmd.content} folder does not exists."}.to_json
         end
