@@ -3,6 +3,7 @@
 Provide auto-completion for the crystal language ( racer like )
 
 For Emacs integration see [TechMagister/emacs-cracker](https://github.com/TechMagister/emacs-cracker)
+![Screenshot](https://github.com/TechMagister/emacs-cracker/raw/master/screenshot.png)
 
 ## Installation
 
