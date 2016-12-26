@@ -150,6 +150,8 @@ $ echo "@test : String\n@test.to_f" | cracker client --context
 - [x] Replate type by a string
 - [x] Daemonize
 - [x] Append new source path for completion ( project path for instance )
+- [x] Method completion
+- [ ] Enum completion
 - [ ] IDE integration
 
 ## Contributing
