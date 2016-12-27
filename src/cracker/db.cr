@@ -39,7 +39,7 @@ module Cracker
 
     def with_context(ctx : String) : Array(DbEntry)
 
-      context = CompletionContext.new ctx
+      context = CompletionContext.new ctx, self
       res = Array(DbEntry).new
 
       if context.is_namespace

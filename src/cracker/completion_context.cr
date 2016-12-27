@@ -2,14 +2,16 @@ module Cracker
 
   TYPE_REGEXP = /[A-Z][a-zA-Z_]+/
   NEW_REGEXP = /(?<type>#{TYPE_REGEXP})(?:\(.+\))?\.new/
+  FUNC_CALL_REGEXP = /(?<class>#{TYPE_REGEXP})\.(?<method>\w+)[\(\s]/
 
   class CompletionContext
 
+    @db : Db?
     @context : String
     @content : String
     @splitted : Array(String)
 
-    def initialize(@context : String)
+    def initialize(@context : String, @db = nil)
       content = ""
       (@context.size-1).downto 0 do |i|
         break unless @context[i].to_s.match /[@A-Za-z0-9_\.:]/
@@ -27,6 +29,15 @@ module Cracker
         m["type"]
       elsif m = @context.match /#{@splitted.first} : (?<type>#{TYPE_REGEXP})/
         m["type"]
+      elsif (m = @context.match /#{@splitted.first} = #{FUNC_CALL_REGEXP}/) && (db = @db)
+        pattern = "#{m["class"]}.#{m["method"]}"
+        res = db.match pattern
+        if res.size == 1 && (entry = res.first) &&
+           (m = entry.signature.match /:\s?(#{TYPE_REGEXP})(?:\(.+\))?\s*$/)
+          return m[1]
+        else
+          nil
+        end
       else
         Server.logger.debug "Can't find the type of \"#{@splitted.first}\""
         nil
