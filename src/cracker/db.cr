@@ -44,6 +44,8 @@ module Cracker
 
       if context.is_namespace
         res = match context.namespace_pattern, EntryType::NameSpace
+      elsif  context.is_class && !context.is_dotted
+        res = match context.content_pattern, EntryType::NameSpace
       elsif context.is_class
         res = match context.class_method_pattern
       elsif type = context.get_type

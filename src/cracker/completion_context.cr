@@ -57,6 +57,10 @@ module Cracker
       @splitted.first.match /^[A-Z]/
     end
 
+    def is_dotted
+      @splitted.size != 1
+    end
+
     def class_method_pattern(type = @splitted.first)
       "#{type}.#{@splitted[1]?}"
     end
@@ -67,6 +71,10 @@ module Cracker
 
     def namespace_pattern
       @content[0...-2]
+    end
+
+    def content_pattern
+      @content
     end
 
   end
