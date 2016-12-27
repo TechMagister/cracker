@@ -48,8 +48,12 @@ module Cracker
         res = match context.content_pattern, EntryType::NameSpace
       elsif context.is_class
         res = match context.class_method_pattern
-      elsif type = context.get_type
+      elsif (type = context.get_type) && context.is_dotted
         res = match context.instance_method_pattern type
+      elsif type # && !context.is_dotted
+        tmp = match context.instance_method_pattern(type)
+        # do not return methods that can only be called with a dot
+        res = tmp.select { |e| e.name.match /#[^\w]/ }
       else
         Server.logger.debug "Can't extract anything : #{ctx[-10..-1]}"
       end
