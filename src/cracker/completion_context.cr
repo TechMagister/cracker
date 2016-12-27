@@ -21,12 +21,22 @@ module Cracker
 
     def get_type
 
-      if m = @context.match /#{@splitted.first} = #{NEW_REGEXP}/
+      if type = get_raw_type
+        type
+      elsif m = @context.match /#{@splitted.first} = #{NEW_REGEXP}/
         m["type"]
       elsif m = @context.match /#{@splitted.first} : (?<type>#{TYPE_REGEXP})/
         m["type"]
       else
         Server.logger.debug "Can't find the type of \"#{@splitted.first}\""
+      end
+
+    end
+
+    def get_raw_type
+
+      if @context.match /#{@splitted.first} = (true|false)\s/
+        "Bool"
       end
 
     end
