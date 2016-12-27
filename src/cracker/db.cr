@@ -33,7 +33,7 @@ module Cracker
   end
 
   class Db
-    @raw_storage = Array(DbEntry).new
+    @raw_storage = Set(DbEntry).new
 
     @path_stack = Array(String).new
 
@@ -73,14 +73,12 @@ module Cracker
 
     def push_module(name : String, file = "")
       @path_stack << name
-      entry = DbEntry.new @path_stack.join("::"), file, EntryType::NameSpace
-      @raw_storage << entry if !@raw_storage.includes? entry
+      @raw_storage << DbEntry.new @path_stack.join("::"), file, EntryType::NameSpace
     end
 
     def push_class(node : Crystal::ClassDef, file = "")
       @path_stack << node.name.to_s.split("::").last
-      entry = DbEntry.new @path_stack.join("::"), file, EntryType::NameSpace
-      @raw_storage << entry if !@raw_storage.includes? entry
+      @raw_storage << DbEntry.new @path_stack.join("::"), file, EntryType::NameSpace
     end
 
     def push_def(func : Crystal::Def, file : String)
