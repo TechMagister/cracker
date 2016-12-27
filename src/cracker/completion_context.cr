@@ -29,6 +29,7 @@ module Cracker
         m["type"]
       else
         Server.logger.debug "Can't find the type of \"#{@splitted.first}\""
+        nil
       end
 
     end
@@ -37,6 +38,12 @@ module Cracker
 
       if @context.match /#{@splitted.first} = (true|false)\s/
         "Bool"
+      elsif m = @context.match /#{@splitted.first} = [-+]?[0-9]+(_([iu])(8|16|32|64))?/
+        if m[1]?
+          "#{(m[2] == "i" ? "Int" : "UInt" )}#{m[3]}"
+        else
+          "Int32"
+        end
       end
 
     end
