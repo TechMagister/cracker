@@ -1,7 +1,7 @@
 require "cli"
 
 module Cracker::Commands
-  class MainCommand < Cli::Supercommand
+  class Cracker < Cli::Supercommand
     class Server < Cli::Command
       class Help
         header "Auto completion server for the crystal language"
@@ -28,9 +28,9 @@ module Cracker::Commands
 
       def run
         validate
-        generator = Cracker::Generator.new [args.crystal_source]
+        generator = ::Cracker::Generator.new [args.crystal_source]
         db = generator.db
-        server = Cracker::Server.new db, "localhost", port
+        server = ::Cracker::Server.new db, "localhost", port
         server.run
       end
     end

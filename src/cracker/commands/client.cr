@@ -4,7 +4,7 @@ require "../client"
 require "../message_builder"
 
 module Cracker::Commands
-  class MainCommand < Cli::Supercommand
+  class Cracker < Cli::Supercommand
     class Client < Cli::Command
 
       class Help
@@ -40,7 +40,7 @@ module Cracker::Commands
       def run
         validate
         begin
-          client = Cracker::Client.new port
+          client = ::Cracker::Client.new port
           cmd = if options.starts_with?
                   MessageBuilder.match options.starts_with
                 elsif options.add_path?
