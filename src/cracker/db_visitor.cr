@@ -19,11 +19,11 @@ module Cracker
 
       if ns.size > 1
         ns[0..-2].each do |namespace|
-          @db.push_module namespace
+          @db.push_module namespace, @current_file
         end
       end
 
-      @db.push_module ns.last
+      @db.push_module ns.last, @current_file
       true
     end
 
@@ -33,11 +33,11 @@ module Cracker
 
       if s.size > 1
         s[0..-2].each do |namespace|
-          @db.push_module namespace
+          @db.push_module namespace, @current_file
         end
       end
 
-      @db.push_class node
+      @db.push_class node, @current_file
       true
     end
 

@@ -12,7 +12,7 @@ module Cracker
     def initialize(@context : String)
       content = ""
       (@context.size-1).downto 0 do |i|
-        break unless @context[i].to_s.match /[@A-Za-z0-9_\.]/
+        break unless @context[i].to_s.match /[@A-Za-z0-9_\.:]/
         content += @context[i]
       end
       @content = content.reverse
@@ -48,6 +48,11 @@ module Cracker
 
     end
 
+
+    def is_namespace
+      @context.ends_with? "::"
+    end
+
     def is_class
       @splitted.first.match /^[A-Z]/
     end
@@ -58,6 +63,10 @@ module Cracker
 
     def instance_method_pattern(type = @splitted.first)
       "#{type}##{@splitted[1]?}"
+    end
+
+    def namespace_pattern
+      @content[0...-2]
     end
 
   end
