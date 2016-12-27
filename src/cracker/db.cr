@@ -1,5 +1,7 @@
 require "json"
 
+require "./completion_context"
+
 module Cracker
   enum EntryType
     Module
@@ -28,45 +30,22 @@ module Cracker
     def_equals_and_hash @signature
   end
 
-  TYPE_REGEXP = /(?<type>[A-Z][\w]+)(?:\(.+\))?\.new/
-
   class Db
     @raw_storage = Array(DbEntry).new
 
     @path_stack = Array(String).new
 
-    def debug
-      @raw_storage.each do |func|
-        puts func
-      end
-    end
-
     def with_context(ctx : String) : Array(DbEntry)
-      content = ""
-      (ctx.size-1).downto 0 do |i|
-        char = ctx[i]
-        break unless char.to_s.match /[@A-Za-z_\.]/
-        content += char
-      end
-      content = content.reverse
-      split = content.split '.'
 
-      varname = split[0]?
-      func = split[1]? || ""
-
+      context = CompletionContext.new ctx
       res = Array(DbEntry).new
 
-      if varname
-        if varname.match(/^[A-Z]/)
-          pattern = varname + '.' + func
-          res = starts_with? pattern
-        elsif match = ctx.match /#{varname} = #{TYPE_REGEXP}/
-          pattern = match["type"] + '#' + func
-          res = starts_with? pattern
-        elsif match = ctx.match /#{varname} : (?<type>[A-Za-z]+)/
-          pattern = match["type"] + "#" + func
-          res = starts_with? pattern
-        end
+      if context.is_class
+        res = starts_with? context.class_method_pattern
+      elsif type = context.get_type
+        res = starts_with? context.instance_method_pattern type
+      else
+        Server.logger.debug "Can't extract anything : #{ctx[-10..-1]}"
       end
 
       res
