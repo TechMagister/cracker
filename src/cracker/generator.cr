@@ -10,7 +10,6 @@ module Cracker
 
     @db : Db
     @visitor : DbVisitor
-    @transformer : Transformer
 
     @processed_files = 0
 
@@ -22,13 +21,11 @@ module Cracker
     def initialize(@paths : Array(String))
       @db = Db.new
       @visitor = DbVisitor.new @db
-      @transformer = Transformer.new @visitor
       compute_paths
     end
 
     def initialize(@db : Db, @paths : Array(String))
       @visitor = DbVisitor.new @db
-      @transformer = Transformer.new @visitor
       compute_paths
     end
 
@@ -44,7 +41,7 @@ module Cracker
       @processed_files += 1
       node = Crystal::Parser.parse File.read(filename)
       @visitor.current_file = filename
-      node.transform @transformer
+      node.accept @visitor
     end
   end
 end
