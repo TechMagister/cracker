@@ -156,6 +156,10 @@ $ echo "@test : String\n@test.to_f" | cracker client --context
 - [x] Append new source path for completion ( project path for instance )
 - [x] Method completion
 - [ ] Enum completion
+- [ ] Macro completion
+- [ ] Alias Completion
+- [ ] Lib completion
+- [ ] Constants completion
 - [ ] IDE integration
 
 ## Contributing
