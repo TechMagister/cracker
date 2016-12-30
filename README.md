@@ -159,6 +159,7 @@ $ echo "@test : String\n@test.to_f" | cracker client --context
 - [ ] Macro completion
 - [ ] Alias Completion
 - [ ] Lib completion
+- [ ] Constants completion
 - [ ] IDE integration
 
 ## Contributing
