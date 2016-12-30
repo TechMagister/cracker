@@ -1,6 +1,6 @@
 module Cracker
 
-  TYPE_REGEXP = /[A-Z][a-zA-Z_]+/
+  TYPE_REGEXP = /[A-Z][a-zA-Z_:]+/
   NEW_REGEXP = /(?<type>#{TYPE_REGEXP})(?:\(.+\))?\.new/
   FUNC_CALL_REGEXP = /(?<class>#{TYPE_REGEXP})\.(?<method>\w+)[\(\s]/
 
@@ -38,6 +38,8 @@ module Cracker
         else
           nil
         end
+      elsif match = @context.match /def #{@splitted.first}\(.*\) : (?<type>#{TYPE_REGEXP})/
+        match["type"]
       else
         Server.logger.debug "Can't find the type of \"#{@splitted.first}\""
         nil
