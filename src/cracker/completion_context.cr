@@ -6,6 +6,8 @@ module Cracker
 
   class CompletionContext
 
+    getter context, content
+
     @db : Db?
     @context : String
     @content : String
@@ -22,9 +24,8 @@ module Cracker
     end
 
     def get_type
-
-      if type = get_raw_type
-        type
+      if raw_type = get_raw_type
+        raw_type
       elsif m = @context.match /#{@splitted.first} = #{NEW_REGEXP}/
         m["type"]
       elsif m = @context.match /#{@splitted.first} : (?<type>#{TYPE_REGEXP})/
@@ -36,7 +37,7 @@ module Cracker
            (m = entry.signature.match /:\s?(#{TYPE_REGEXP})(?:\(.+\))?\s*$/)
           return m[1]
         else
-          nil
+          Server.logger.debug "Fail to get the return type of function call : #{m}"
         end
       elsif match = @context.match /def #{@splitted.first}\(.*\) : (?<type>#{TYPE_REGEXP})/
         match["type"]
@@ -48,7 +49,6 @@ module Cracker
     end
 
     def get_raw_type
-
       if @context.match /#{@splitted.first} = (true|false)\s/
         "Bool"
       elsif m = @context.match /#{@splitted.first} = [-+]?[0-9]+(_([iu])(8|16|32|64))?/
@@ -58,7 +58,24 @@ module Cracker
           "Int32"
         end
       end
+    end
 
+    def internal_match
+      splitted = @content.split "::"
+
+      if splitted.size == 1
+        if scan = @context.scan(/ (#{@content}\w+)/)
+          res = Array(DbEntry).new
+          scan.each do |m|
+            res << DbEntry.new m[1], "", EntryType::NameSpace
+          end
+          res
+        else
+          Array(DbEntry).new
+        end
+      else
+        Array(DbEntry).new
+      end
     end
 
 

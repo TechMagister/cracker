@@ -46,24 +46,31 @@ module Cracker
         res = match context.namespace_pattern, EntryType::NameSpace
       elsif  context.is_class && !context.is_dotted
         res = match context.content_pattern, EntryType::NameSpace
+        if res.empty?
+          res = context.internal_match
+        end
       elsif context.is_class
         res = match context.class_method_pattern
-      elsif (type = context.get_type) && context.is_dotted
-        res = match context.instance_method_pattern type
-      elsif type # && !context.is_dotted
-        tmp = match context.instance_method_pattern(type)
+      elsif (var_type = context.get_type) && context.is_dotted
+        res = match context.instance_method_pattern var_type
+      elsif var_type # && !context.is_dotted
+        tmp = match context.instance_method_pattern(var_type)
         # do not return methods that can only be called with a dot
         res = tmp.select { |e| e.name.match /#[^\w]/ }
       else
         Server.logger.debug "Can't extract anything : #{ctx[-10..-1]}"
       end
 
+      if res.empty?
+        Server.logger.debug "No match found for #{context.content_pattern}"
+      end
+
       res
     end
 
-    def match(pattern : String, type = EntryType::Function) : Array(DbEntry)
+    def match(pattern : String, etype = EntryType::Function) : Array(DbEntry)
       @raw_storage.select do |entry|
-        entry.name.includes?(pattern) && entry.type == type
+        entry.name.includes?(pattern) && entry.type == etype
       end
     end
 
