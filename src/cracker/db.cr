@@ -7,8 +7,8 @@ module Cracker
     NameSpace
     Function
 
-    def to_json(io)
-      io << '"' << to_s << '"'
+    def to_json(builder)
+      builder.string(to_s)
     end
   end
 
