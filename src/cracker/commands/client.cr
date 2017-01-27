@@ -3,13 +3,12 @@ require "cli"
 require "../client"
 require "../message_builder"
 
-module Cracker::Commands
-  class Cracker < Cli::Supercommand
+module ::Cracker::Commands
+  class Main < Cli::Supercommand
     class Client < Cli::Command
 
       class Help
         header "Auto completion client for Cracker server"
-        footer "(C) 2016 Ghilde Sud"
       end
 
       class Options

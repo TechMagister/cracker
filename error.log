@@ -1,0 +1,399 @@
+Crystal 0.20.5+2 [15032ccf2] (2017-01-27)
+
+
+Bug: `def refill_in_buffer(io : IO::MultiWriter)
+  buffer_remaining = (BUFFER_SIZE - @in_buffer_left) - (@in_buffer - @buffer.to_unsafe)
+  if buffer_remaining < 64
+    @buffer.copy_from(@in_buffer, @in_buffer_left)
+    @in_buffer = @buffer.to_unsafe
+    buffer_remaining = BUFFER_SIZE - @in_buffer_left
+  end
+  @in_buffer_left
+  LibC::SizeT
+  io.read(Slice.new(@in_buffer + @in_buffer_left, buffer_remaining))
+end` at /home/arnaud/workspace/repos/crystal/src/io/encoding.cr:123:13 has no type
+0xda1a91: *Crystal::Def+ at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/semantic/bindings.cr 13:18
+0x13e5b53: *Crystal::CodeGenVisitor#codegen_fun_signature_non_external<String, Crystal::Def+, Crystal::Type+, Bool, Bool>:Array(Crystal::Arg) at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/fun.cr 220:24
+0x13e473a: *Crystal::CodeGenVisitor#codegen_fun_signature<String, Crystal::Def+, Crystal::Type+, Bool, Bool>:Array(Crystal::Arg) at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/fun.cr 178:7
+0x13e3d19: *Crystal::CodeGenVisitor#codegen_fun<String, Crystal::Def+, Crystal::Type+, Bool, LLVM::Module, Bool, Bool>:LLVM::Function at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/fun.cr 68:14
+0x13e8c71: *Crystal::CodeGenVisitor#codegen_fun<String, Crystal::Def+, Crystal::Type+>:LLVM::Function at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/fun.cr 48:3
+0x13e883b: *Crystal::CodeGenVisitor#target_def_fun<Crystal::Def+, Crystal::Type+>:LLVM::Function at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/fun.cr 8:54
+0x13f90d8: *Crystal::CodeGenVisitor#codegen_call<Crystal::Call, Crystal::Def+, Crystal::Type+, Array(LLVM::Value)>:(Bool | LLVM::Value | Nil) at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/call.cr 405:12
+0x13f0852: *Crystal::CodeGenVisitor#visit<Crystal::Call>:Bool at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/call.cr 34:7
+0xbfefff: *Crystal::ASTNode+ at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/syntax/visitor.cr 27:12
+0x13db1e1: *Crystal::CodeGenVisitor#accept<Crystal::ASTNode+>:Nil at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/codegen.cr 1894:7
+0x13e8e09: *Crystal::CodeGenVisitor#visit<Crystal::Expressions>:Bool at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/codegen.cr 547:9
+0xbfe2f2: *Crystal::ASTNode+ at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/syntax/visitor.cr 27:12
+0x13db1e1: *Crystal::CodeGenVisitor#accept<Crystal::ASTNode+>:Nil at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/codegen.cr 1894:7
+0x140983f: *Crystal::CodeGenVisitor#codegen_if_branch<Crystal::CodeGenVisitor::Phi, Crystal::ASTNode+, LLVM::BasicBlock, Bool>:(LLVM::Value | Nil) at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/codegen.cr 713:7
+0x14088bb: *Crystal::CodeGenVisitor#visit<Crystal::If>:Bool at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/codegen.cr 704:9
+0xbfe856: *Crystal::ASTNode+ at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/syntax/visitor.cr 27:12
+0x13db1e1: *Crystal::CodeGenVisitor#accept<Crystal::ASTNode+>:Nil at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/codegen.cr 1894:7
+0x140983f: *Crystal::CodeGenVisitor#codegen_if_branch<Crystal::CodeGenVisitor::Phi, Crystal::ASTNode+, LLVM::BasicBlock, Bool>:(LLVM::Value | Nil) at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/codegen.cr 713:7
+0x1408903: *Crystal::CodeGenVisitor#visit<Crystal::If>:Bool at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/codegen.cr 705:9
+0xbfe856: *Crystal::ASTNode+ at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/syntax/visitor.cr 27:12
+0x13db1e1: *Crystal::CodeGenVisitor#accept<Crystal::ASTNode+>:Nil at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/codegen.cr 1894:7
+0x13e8e09: *Crystal::CodeGenVisitor#visit<Crystal::Expressions>:Bool at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/codegen.cr 547:9
+0xbfe2f2: *Crystal::ASTNode+ at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/syntax/visitor.cr 27:12
+0x13db1e1: *Crystal::CodeGenVisitor#accept<Crystal::ASTNode+>:Nil at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/codegen.cr 1894:7
+0x140983f: *Crystal::CodeGenVisitor#codegen_if_branch<Crystal::CodeGenVisitor::Phi, Crystal::ASTNode+, LLVM::BasicBlock, Bool>:(LLVM::Value | Nil) at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/codegen.cr 713:7
+0x14088bb: *Crystal::CodeGenVisitor#visit<Crystal::If>:Bool at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/codegen.cr 704:9
+0xbfe856: *Crystal::ASTNode+ at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/syntax/visitor.cr 27:12
+0x13db1e1: *Crystal::CodeGenVisitor#accept<Crystal::ASTNode+>:Nil at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/codegen.cr 1894:7
+0x13e8e09: *Crystal::CodeGenVisitor#visit<Crystal::Expressions>:Bool at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/codegen.cr 547:9
+0xbfe2f2: *Crystal::ASTNode+ at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/syntax/visitor.cr 27:12
+0x13db1e1: *Crystal::CodeGenVisitor#accept<Crystal::ASTNode+>:Nil at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/codegen.cr 1894:7
+0x140e7cd: *Crystal::CodeGenVisitor#visit<Crystal::Yield>:Bool at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/codegen.cr 68:5
+0xbfef7d: *Crystal::ASTNode+ at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/syntax/visitor.cr 27:12
+0x13db1e1: *Crystal::CodeGenVisitor#accept<Crystal::ASTNode+>:Nil at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/codegen.cr 1894:7
+0x13e8e09: *Crystal::CodeGenVisitor#visit<Crystal::Expressions>:Bool at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/codegen.cr 547:9
+0xbfe2f2: *Crystal::ASTNode+ at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/syntax/visitor.cr 27:12
+0x13db1e1: *Crystal::CodeGenVisitor#accept<Crystal::ASTNode+>:Nil at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/codegen.cr 1894:7
+0x1409c7d: *Crystal::CodeGenVisitor#visit<Crystal::While>:Bool at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/codegen.cr 740:11
+0xbfe8b2: *Crystal::ASTNode+ at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/syntax/visitor.cr 27:12
+0x13db1e1: *Crystal::CodeGenVisitor#accept<Crystal::ASTNode+>:Nil at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/codegen.cr 1894:7
+0x13e8e09: *Crystal::CodeGenVisitor#visit<Crystal::Expressions>:Bool at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/codegen.cr 547:9
+0xbfe2f2: *Crystal::ASTNode+ at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/syntax/visitor.cr 27:12
+0x13db1e1: *Crystal::CodeGenVisitor#accept<Crystal::ASTNode+>:Nil at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/codegen.cr 1894:7
+0x13f7b7f: *Crystal::CodeGenVisitor#codegen_call_with_block<Crystal::Call, Crystal::Block, Crystal::Type+, Array(LLVM::Value)>:LLVM::Value at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/call.cr 283:13
+0x13f08b8: *Crystal::CodeGenVisitor#visit<Crystal::Call>:Bool at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/call.cr 31:9
+0xbfefff: *Crystal::ASTNode+ at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/syntax/visitor.cr 27:12
+0x13db1e1: *Crystal::CodeGenVisitor#accept<Crystal::ASTNode+>:Nil at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/codegen.cr 1894:7
+0x13e4581: *Crystal::CodeGenVisitor#codegen_fun<String, Crystal::Def+, Crystal::Type+, Bool, LLVM::Module, Bool, Bool>:LLVM::Function at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/fun.cr 128:9
+0x13e8c71: *Crystal::CodeGenVisitor#codegen_fun<String, Crystal::Def+, Crystal::Type+>:LLVM::Function at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/fun.cr 48:3
+0x13e883b: *Crystal::CodeGenVisitor#target_def_fun<Crystal::Def+, Crystal::Type+>:LLVM::Function at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/fun.cr 8:54
+0x13f90d8: *Crystal::CodeGenVisitor#codegen_call<Crystal::Call, Crystal::Def+, Crystal::Type+, Array(LLVM::Value)>:(Bool | LLVM::Value | Nil) at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/call.cr 405:12
+0x13f0852: *Crystal::CodeGenVisitor#visit<Crystal::Call>:Bool at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/call.cr 34:7
+0xbfefff: *Crystal::ASTNode+ at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/syntax/visitor.cr 27:12
+0x13db1e1: *Crystal::CodeGenVisitor#accept<Crystal::ASTNode+>:Nil at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/codegen.cr 1894:7
+0x13e8e09: *Crystal::CodeGenVisitor#visit<Crystal::Expressions>:Bool at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/codegen.cr 547:9
+0xbfe2f2: *Crystal::ASTNode+ at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/syntax/visitor.cr 27:12
+0x13db1e1: *Crystal::CodeGenVisitor#accept<Crystal::ASTNode+>:Nil at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/codegen.cr 1894:7
+0x13e4581: *Crystal::CodeGenVisitor#codegen_fun<String, Crystal::Def+, Crystal::Type+, Bool, LLVM::Module, Bool, Bool>:LLVM::Function at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/fun.cr 128:9
+0x13e8c71: *Crystal::CodeGenVisitor#codegen_fun<String, Crystal::Def+, Crystal::Type+>:LLVM::Function at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/fun.cr 48:3
+0x13e883b: *Crystal::CodeGenVisitor#target_def_fun<Crystal::Def+, Crystal::Type+>:LLVM::Function at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/fun.cr 8:54
+0x13f90d8: *Crystal::CodeGenVisitor#codegen_call<Crystal::Call, Crystal::Def+, Crystal::Type+, Array(LLVM::Value)>:(Bool | LLVM::Value | Nil) at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/call.cr 405:12
+0x13f0852: *Crystal::CodeGenVisitor#visit<Crystal::Call>:Bool at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/call.cr 34:7
+0xbfefff: *Crystal::ASTNode+ at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/syntax/visitor.cr 27:12
+0x13db1e1: *Crystal::CodeGenVisitor#accept<Crystal::ASTNode+>:Nil at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/codegen.cr 1894:7
+0x140983f: *Crystal::CodeGenVisitor#codegen_if_branch<Crystal::CodeGenVisitor::Phi, Crystal::ASTNode+, LLVM::BasicBlock, Bool>:(LLVM::Value | Nil) at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/codegen.cr 713:7
+0x14088bb: *Crystal::CodeGenVisitor#visit<Crystal::If>:Bool at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/codegen.cr 704:9
+0xbfe856: *Crystal::ASTNode+ at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/syntax/visitor.cr 27:12
+0x13db1e1: *Crystal::CodeGenVisitor#accept<Crystal::ASTNode+>:Nil at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/codegen.cr 1894:7
+0x13e4581: *Crystal::CodeGenVisitor#codegen_fun<String, Crystal::Def+, Crystal::Type+, Bool, LLVM::Module, Bool, Bool>:LLVM::Function at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/fun.cr 128:9
+0x13e8c71: *Crystal::CodeGenVisitor#codegen_fun<String, Crystal::Def+, Crystal::Type+>:LLVM::Function at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/fun.cr 48:3
+0x13e883b: *Crystal::CodeGenVisitor#target_def_fun<Crystal::Def+, Crystal::Type+>:LLVM::Function at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/fun.cr 8:54
+0x13f90d8: *Crystal::CodeGenVisitor#codegen_call<Crystal::Call, Crystal::Def+, Crystal::Type+, Array(LLVM::Value)>:(Bool | LLVM::Value | Nil) at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/call.cr 405:12
+0x13f0852: *Crystal::CodeGenVisitor#visit<Crystal::Call>:Bool at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/call.cr 34:7
+0xbfefff: *Crystal::ASTNode+ at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/syntax/visitor.cr 27:12
+0x13db1e1: *Crystal::CodeGenVisitor#accept<Crystal::ASTNode+>:Nil at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/codegen.cr 1894:7
+0x13e9e2e: *Crystal::CodeGenVisitor#codegen_assign<Crystal::ASTNode+, Crystal::ASTNode+, Crystal::Assign>:(Bool | Nil) at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/codegen.cr 875:9
+0x13e98a6: *Crystal::CodeGenVisitor#visit<Crystal::Assign>:(Bool | Nil) at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/codegen.cr 839:7
+0xbfea2c: *Crystal::ASTNode+ at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/syntax/visitor.cr 27:12
+0x13db1e1: *Crystal::CodeGenVisitor#accept<Crystal::ASTNode+>:Nil at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/codegen.cr 1894:7
+0x13e8e09: *Crystal::CodeGenVisitor#visit<Crystal::Expressions>:Bool at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/codegen.cr 547:9
+0xbfe2f2: *Crystal::ASTNode+ at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/syntax/visitor.cr 27:12
+0x13db1e1: *Crystal::CodeGenVisitor#accept<Crystal::ASTNode+>:Nil at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/codegen.cr 1894:7
+0x13e4581: *Crystal::CodeGenVisitor#codegen_fun<String, Crystal::Def+, Crystal::Type+, Bool, LLVM::Module, Bool, Bool>:LLVM::Function at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/fun.cr 128:9
+0x13e8c71: *Crystal::CodeGenVisitor#codegen_fun<String, Crystal::Def+, Crystal::Type+>:LLVM::Function at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/fun.cr 48:3
+0x13e883b: *Crystal::CodeGenVisitor#target_def_fun<Crystal::Def+, Crystal::Type+>:LLVM::Function at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/fun.cr 8:54
+0x13f90d8: *Crystal::CodeGenVisitor#codegen_call<Crystal::Call, Crystal::Def+, Crystal::Type+, Array(LLVM::Value)>:(Bool | LLVM::Value | Nil) at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/call.cr 405:12
+0x13f0852: *Crystal::CodeGenVisitor#visit<Crystal::Call>:Bool at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/call.cr 34:7
+0xbfefff: *Crystal::ASTNode+ at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/syntax/visitor.cr 27:12
+0x13db1e1: *Crystal::CodeGenVisitor#accept<Crystal::ASTNode+>:Nil at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/codegen.cr 1894:7
+0x13e9e2e: *Crystal::CodeGenVisitor#codegen_assign<Crystal::ASTNode+, Crystal::ASTNode+, Crystal::Assign>:(Bool | Nil) at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/codegen.cr 875:9
+0x13e98a6: *Crystal::CodeGenVisitor#visit<Crystal::Assign>:(Bool | Nil) at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/codegen.cr 839:7
+0xbfea2c: *Crystal::ASTNode+ at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/syntax/visitor.cr 27:12
+0x13db1e1: *Crystal::CodeGenVisitor#accept<Crystal::ASTNode+>:Nil at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/codegen.cr 1894:7
+0x13e8e09: *Crystal::CodeGenVisitor#visit<Crystal::Expressions>:Bool at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/codegen.cr 547:9
+0xbfe2f2: *Crystal::ASTNode+ at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/syntax/visitor.cr 27:12
+0x13db1e1: *Crystal::CodeGenVisitor#accept<Crystal::ASTNode+>:Nil at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/codegen.cr 1894:7
+0x13e4581: *Crystal::CodeGenVisitor#codegen_fun<String, Crystal::Def+, Crystal::Type+, Bool, LLVM::Module, Bool, Bool>:LLVM::Function at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/fun.cr 128:9
+0x13e8c71: *Crystal::CodeGenVisitor#codegen_fun<String, Crystal::Def+, Crystal::Type+>:LLVM::Function at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/fun.cr 48:3
+0x13e883b: *Crystal::CodeGenVisitor#target_def_fun<Crystal::Def+, Crystal::Type+>:LLVM::Function at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/fun.cr 8:54
+0x13f90d8: *Crystal::CodeGenVisitor#codegen_call<Crystal::Call, Crystal::Def+, Crystal::Type+, Array(LLVM::Value)>:(Bool | LLVM::Value | Nil) at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/call.cr 405:12
+0x13f0852: *Crystal::CodeGenVisitor#visit<Crystal::Call>:Bool at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/call.cr 34:7
+0xf0c513: *Crystal::Call at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/syntax/visitor.cr 27:12
+0x13f05f1: *Crystal::CodeGenVisitor#accept<Crystal::Call>:Nil at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/codegen.cr 1894:7
+0x13f1c3a: *Crystal::CodeGenVisitor#codegen_dispatch<Crystal::Call, Array(Crystal::Def+)>:Bool at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/call.cr 375:11
+0x13f06fe: *Crystal::CodeGenVisitor#visit<Crystal::Call>:Bool at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/call.cr 15:7
+0xbfefff: *Crystal::ASTNode+ at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/syntax/visitor.cr 27:12
+0x13db1e1: *Crystal::CodeGenVisitor#accept<Crystal::ASTNode+>:Nil at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/codegen.cr 1894:7
+0x13e9e2e: *Crystal::CodeGenVisitor#codegen_assign<Crystal::ASTNode+, Crystal::ASTNode+, Crystal::Assign>:(Bool | Nil) at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/codegen.cr 875:9
+0x13e98a6: *Crystal::CodeGenVisitor#visit<Crystal::Assign>:(Bool | Nil) at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/codegen.cr 839:7
+0xbfea2c: *Crystal::ASTNode+ at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/syntax/visitor.cr 27:12
+0x13db1e1: *Crystal::CodeGenVisitor#accept<Crystal::ASTNode+>:Nil at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/codegen.cr 1894:7
+0x1408a5d: *Crystal::CodeGenVisitor#codegen_cond<Crystal::ASTNode+>:LLVM::Value at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/codegen.cr 763:20
+0x1408a0b: *Crystal::CodeGenVisitor#codegen_cond_branch<Crystal::ASTNode+, LLVM::BasicBlock, LLVM::BasicBlock>:Nil at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/codegen.cr 756:12
+0x140882a: *Crystal::CodeGenVisitor#visit<Crystal::If>:Bool at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/codegen.cr 700:9
+0xbfe856: *Crystal::ASTNode+ at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/syntax/visitor.cr 27:12
+0x13db1e1: *Crystal::CodeGenVisitor#accept<Crystal::ASTNode+>:Nil at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/codegen.cr 1894:7
+0x13e9e2e: *Crystal::CodeGenVisitor#codegen_assign<Crystal::ASTNode+, Crystal::ASTNode+, Crystal::Assign>:(Bool | Nil) at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/codegen.cr 875:9
+0x13e98a6: *Crystal::CodeGenVisitor#visit<Crystal::Assign>:(Bool | Nil) at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/codegen.cr 839:7
+0xbfea2c: *Crystal::ASTNode+ at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/syntax/visitor.cr 27:12
+0x13db1e1: *Crystal::CodeGenVisitor#accept<Crystal::ASTNode+>:Nil at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/codegen.cr 1894:7
+0x13e4581: *Crystal::CodeGenVisitor#codegen_fun<String, Crystal::Def+, Crystal::Type+, Bool, LLVM::Module, Bool, Bool>:LLVM::Function at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/fun.cr 128:9
+0x13e8c71: *Crystal::CodeGenVisitor#codegen_fun<String, Crystal::Def+, Crystal::Type+>:LLVM::Function at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/fun.cr 48:3
+0x13e883b: *Crystal::CodeGenVisitor#target_def_fun<Crystal::Def+, Crystal::Type+>:LLVM::Function at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/fun.cr 8:54
+0x13f90d8: *Crystal::CodeGenVisitor#codegen_call<Crystal::Call, Crystal::Def+, Crystal::Type+, Array(LLVM::Value)>:(Bool | LLVM::Value | Nil) at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/call.cr 405:12
+0x13f0852: *Crystal::CodeGenVisitor#visit<Crystal::Call>:Bool at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/call.cr 34:7
+0xf0c513: *Crystal::Call at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/syntax/visitor.cr 27:12
+0x13f05f1: *Crystal::CodeGenVisitor#accept<Crystal::Call>:Nil at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/codegen.cr 1894:7
+0x13f1c3a: *Crystal::CodeGenVisitor#codegen_dispatch<Crystal::Call, Array(Crystal::Def+)>:Bool at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/call.cr 375:11
+0x13f06fe: *Crystal::CodeGenVisitor#visit<Crystal::Call>:Bool at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/call.cr 15:7
+0xbfefff: *Crystal::ASTNode+ at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/syntax/visitor.cr 27:12
+0x13db1e1: *Crystal::CodeGenVisitor#accept<Crystal::ASTNode+>:Nil at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/codegen.cr 1894:7
+0x13e8e09: *Crystal::CodeGenVisitor#visit<Crystal::Expressions>:Bool at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/codegen.cr 547:9
+0xbfe2f2: *Crystal::ASTNode+ at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/syntax/visitor.cr 27:12
+0x13db1e1: *Crystal::CodeGenVisitor#accept<Crystal::ASTNode+>:Nil at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/codegen.cr 1894:7
+0x13e4581: *Crystal::CodeGenVisitor#codegen_fun<String, Crystal::Def+, Crystal::Type+, Bool, LLVM::Module, Bool, Bool>:LLVM::Function at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/fun.cr 128:9
+0x13e8c71: *Crystal::CodeGenVisitor#codegen_fun<String, Crystal::Def+, Crystal::Type+>:LLVM::Function at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/fun.cr 48:3
+0x13e883b: *Crystal::CodeGenVisitor#target_def_fun<Crystal::Def+, Crystal::Type+>:LLVM::Function at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/fun.cr 8:54
+0x13f90d8: *Crystal::CodeGenVisitor#codegen_call<Crystal::Call, Crystal::Def+, Crystal::Type+, Array(LLVM::Value)>:(Bool | LLVM::Value | Nil) at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/call.cr 405:12
+0x13f0852: *Crystal::CodeGenVisitor#visit<Crystal::Call>:Bool at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/call.cr 34:7
+0xbfefff: *Crystal::ASTNode+ at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/syntax/visitor.cr 27:12
+0x13db1e1: *Crystal::CodeGenVisitor#accept<Crystal::ASTNode+>:Nil at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/codegen.cr 1894:7
+0x13e8e09: *Crystal::CodeGenVisitor#visit<Crystal::Expressions>:Bool at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/codegen.cr 547:9
+0xbfe2f2: *Crystal::ASTNode+ at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/syntax/visitor.cr 27:12
+0x13db1e1: *Crystal::CodeGenVisitor#accept<Crystal::ASTNode+>:Nil at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/codegen.cr 1894:7
+0x1409c7d: *Crystal::CodeGenVisitor#visit<Crystal::While>:Bool at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/codegen.cr 740:11
+0xbfe8b2: *Crystal::ASTNode+ at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/syntax/visitor.cr 27:12
+0x13db1e1: *Crystal::CodeGenVisitor#accept<Crystal::ASTNode+>:Nil at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/codegen.cr 1894:7
+0x13e4581: *Crystal::CodeGenVisitor#codegen_fun<String, Crystal::Def+, Crystal::Type+, Bool, LLVM::Module, Bool, Bool>:LLVM::Function at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/fun.cr 128:9
+0x13e8c71: *Crystal::CodeGenVisitor#codegen_fun<String, Crystal::Def+, Crystal::Type+>:LLVM::Function at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/fun.cr 48:3
+0x13e883b: *Crystal::CodeGenVisitor#target_def_fun<Crystal::Def+, Crystal::Type+>:LLVM::Function at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/fun.cr 8:54
+0x13f90d8: *Crystal::CodeGenVisitor#codegen_call<Crystal::Call, Crystal::Def+, Crystal::Type+, Array(LLVM::Value)>:(Bool | LLVM::Value | Nil) at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/call.cr 405:12
+0x13f0852: *Crystal::CodeGenVisitor#visit<Crystal::Call>:Bool at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/call.cr 34:7
+0xbfefff: *Crystal::ASTNode+ at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/syntax/visitor.cr 27:12
+0x13db1e1: *Crystal::CodeGenVisitor#accept<Crystal::ASTNode+>:Nil at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/codegen.cr 1894:7
+0x13e8e09: *Crystal::CodeGenVisitor#visit<Crystal::Expressions>:Bool at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/codegen.cr 547:9
+0xbfe2f2: *Crystal::ASTNode+ at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/syntax/visitor.cr 27:12
+0x13db1e1: *Crystal::CodeGenVisitor#accept<Crystal::ASTNode+>:Nil at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/codegen.cr 1894:7
+0x13e4581: *Crystal::CodeGenVisitor#codegen_fun<String, Crystal::Def+, Crystal::Type+, Bool, LLVM::Module, Bool, Bool>:LLVM::Function at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/fun.cr 128:9
+0x13e8c71: *Crystal::CodeGenVisitor#codegen_fun<String, Crystal::Def+, Crystal::Type+>:LLVM::Function at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/fun.cr 48:3
+0x13e883b: *Crystal::CodeGenVisitor#target_def_fun<Crystal::Def+, Crystal::Type+>:LLVM::Function at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/fun.cr 8:54
+0x13f90d8: *Crystal::CodeGenVisitor#codegen_call<Crystal::Call, Crystal::Def+, Crystal::Type+, Array(LLVM::Value)>:(Bool | LLVM::Value | Nil) at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/call.cr 405:12
+0x13f0852: *Crystal::CodeGenVisitor#visit<Crystal::Call>:Bool at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/call.cr 34:7
+0xbfefff: *Crystal::ASTNode+ at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/syntax/visitor.cr 27:12
+0x13db1e1: *Crystal::CodeGenVisitor#accept<Crystal::ASTNode+>:Nil at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/codegen.cr 1894:7
+0x13e8e09: *Crystal::CodeGenVisitor#visit<Crystal::Expressions>:Bool at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/codegen.cr 547:9
+0xbfe2f2: *Crystal::ASTNode+ at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/syntax/visitor.cr 27:12
+0x13db1e1: *Crystal::CodeGenVisitor#accept<Crystal::ASTNode+>:Nil at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/codegen.cr 1894:7
+0x13e4581: *Crystal::CodeGenVisitor#codegen_fun<String, Crystal::Def+, Crystal::Type+, Bool, LLVM::Module, Bool, Bool>:LLVM::Function at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/fun.cr 128:9
+0x13e8c71: *Crystal::CodeGenVisitor#codegen_fun<String, Crystal::Def+, Crystal::Type+>:LLVM::Function at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/fun.cr 48:3
+0x13e883b: *Crystal::CodeGenVisitor#target_def_fun<Crystal::Def+, Crystal::Type+>:LLVM::Function at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/fun.cr 8:54
+0x13f90d8: *Crystal::CodeGenVisitor#codegen_call<Crystal::Call, Crystal::Def+, Crystal::Type+, Array(LLVM::Value)>:(Bool | LLVM::Value | Nil) at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/call.cr 405:12
+0x13f0852: *Crystal::CodeGenVisitor#visit<Crystal::Call>:Bool at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/call.cr 34:7
+0xbfefff: *Crystal::ASTNode+ at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/syntax/visitor.cr 27:12
+0x13db1e1: *Crystal::CodeGenVisitor#accept<Crystal::ASTNode+>:Nil at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/codegen.cr 1894:7
+0x13e8e09: *Crystal::CodeGenVisitor#visit<Crystal::Expressions>:Bool at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/codegen.cr 547:9
+0xbfe2f2: *Crystal::ASTNode+ at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/syntax/visitor.cr 27:12
+0x13db1e1: *Crystal::CodeGenVisitor#accept<Crystal::ASTNode+>:Nil at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/codegen.cr 1894:7
+0x13e4581: *Crystal::CodeGenVisitor#codegen_fun<String, Crystal::Def+, Crystal::Type+, Bool, LLVM::Module, Bool, Bool>:LLVM::Function at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/fun.cr 128:9
+0x13e8c71: *Crystal::CodeGenVisitor#codegen_fun<String, Crystal::Def+, Crystal::Type+>:LLVM::Function at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/fun.cr 48:3
+0x13e883b: *Crystal::CodeGenVisitor#target_def_fun<Crystal::Def+, Crystal::Type+>:LLVM::Function at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/fun.cr 8:54
+0x13f90d8: *Crystal::CodeGenVisitor#codegen_call<Crystal::Call, Crystal::Def+, Crystal::Type+, Array(LLVM::Value)>:(Bool | LLVM::Value | Nil) at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/call.cr 405:12
+0x13f0852: *Crystal::CodeGenVisitor#visit<Crystal::Call>:Bool at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/call.cr 34:7
+0xbfefff: *Crystal::ASTNode+ at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/syntax/visitor.cr 27:12
+0x13db1e1: *Crystal::CodeGenVisitor#accept<Crystal::ASTNode+>:Nil at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/codegen.cr 1894:7
+0x13e8e09: *Crystal::CodeGenVisitor#visit<Crystal::Expressions>:Bool at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/codegen.cr 547:9
+0xbfe2f2: *Crystal::ASTNode+ at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/syntax/visitor.cr 27:12
+0x13db1e1: *Crystal::CodeGenVisitor#accept<Crystal::ASTNode+>:Nil at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/codegen.cr 1894:7
+0x13e4581: *Crystal::CodeGenVisitor#codegen_fun<String, Crystal::Def+, Crystal::Type+, Bool, LLVM::Module, Bool, Bool>:LLVM::Function at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/fun.cr 128:9
+0x13e8c71: *Crystal::CodeGenVisitor#codegen_fun<String, Crystal::Def+, Crystal::Type+>:LLVM::Function at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/fun.cr 48:3
+0x13e883b: *Crystal::CodeGenVisitor#target_def_fun<Crystal::Def+, Crystal::Type+>:LLVM::Function at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/fun.cr 8:54
+0x13f90d8: *Crystal::CodeGenVisitor#codegen_call<Crystal::Call, Crystal::Def+, Crystal::Type+, Array(LLVM::Value)>:(Bool | LLVM::Value | Nil) at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/call.cr 405:12
+0x13f0852: *Crystal::CodeGenVisitor#visit<Crystal::Call>:Bool at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/call.cr 34:7
+0xbfefff: *Crystal::ASTNode+ at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/syntax/visitor.cr 27:12
+0x13db1e1: *Crystal::CodeGenVisitor#accept<Crystal::ASTNode+>:Nil at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/codegen.cr 1894:7
+0x13e9e2e: *Crystal::CodeGenVisitor#codegen_assign<Crystal::ASTNode+, Crystal::ASTNode+, Crystal::Assign>:(Bool | Nil) at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/codegen.cr 875:9
+0x13e98a6: *Crystal::CodeGenVisitor#visit<Crystal::Assign>:(Bool | Nil) at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/codegen.cr 839:7
+0xbfea2c: *Crystal::ASTNode+ at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/syntax/visitor.cr 27:12
+0x13db1e1: *Crystal::CodeGenVisitor#accept<Crystal::ASTNode+>:Nil at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/codegen.cr 1894:7
+0x13e8e09: *Crystal::CodeGenVisitor#visit<Crystal::Expressions>:Bool at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/codegen.cr 547:9
+0xbfe2f2: *Crystal::ASTNode+ at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/syntax/visitor.cr 27:12
+0x13db1e1: *Crystal::CodeGenVisitor#accept<Crystal::ASTNode+>:Nil at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/codegen.cr 1894:7
+0x13e4581: *Crystal::CodeGenVisitor#codegen_fun<String, Crystal::Def+, Crystal::Type+, Bool, LLVM::Module, Bool, Bool>:LLVM::Function at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/fun.cr 128:9
+0x13e8c71: *Crystal::CodeGenVisitor#codegen_fun<String, Crystal::Def+, Crystal::Type+>:LLVM::Function at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/fun.cr 48:3
+0x13e883b: *Crystal::CodeGenVisitor#target_def_fun<Crystal::Def+, Crystal::Type+>:LLVM::Function at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/fun.cr 8:54
+0x13f90d8: *Crystal::CodeGenVisitor#codegen_call<Crystal::Call, Crystal::Def+, Crystal::Type+, Array(LLVM::Value)>:(Bool | LLVM::Value | Nil) at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/call.cr 405:12
+0x13f0852: *Crystal::CodeGenVisitor#visit<Crystal::Call>:Bool at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/call.cr 34:7
+0xbfefff: *Crystal::ASTNode+ at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/syntax/visitor.cr 27:12
+0x13db1e1: *Crystal::CodeGenVisitor#accept<Crystal::ASTNode+>:Nil at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/codegen.cr 1894:7
+0x13e9e2e: *Crystal::CodeGenVisitor#codegen_assign<Crystal::ASTNode+, Crystal::ASTNode+, Crystal::Assign>:(Bool | Nil) at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/codegen.cr 875:9
+0x13e98a6: *Crystal::CodeGenVisitor#visit<Crystal::Assign>:(Bool | Nil) at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/codegen.cr 839:7
+0xbfea2c: *Crystal::ASTNode+ at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/syntax/visitor.cr 27:12
+0x13db1e1: *Crystal::CodeGenVisitor#accept<Crystal::ASTNode+>:Nil at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/codegen.cr 1894:7
+0x13e8e09: *Crystal::CodeGenVisitor#visit<Crystal::Expressions>:Bool at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/codegen.cr 547:9
+0xbfe2f2: *Crystal::ASTNode+ at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/syntax/visitor.cr 27:12
+0x13db1e1: *Crystal::CodeGenVisitor#accept<Crystal::ASTNode+>:Nil at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/codegen.cr 1894:7
+0x13e4581: *Crystal::CodeGenVisitor#codegen_fun<String, Crystal::Def+, Crystal::Type+, Bool, LLVM::Module, Bool, Bool>:LLVM::Function at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/fun.cr 128:9
+0x13e8c71: *Crystal::CodeGenVisitor#codegen_fun<String, Crystal::Def+, Crystal::Type+>:LLVM::Function at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/fun.cr 48:3
+0x13e883b: *Crystal::CodeGenVisitor#target_def_fun<Crystal::Def+, Crystal::Type+>:LLVM::Function at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/fun.cr 8:54
+0x13f90d8: *Crystal::CodeGenVisitor#codegen_call<Crystal::Call, Crystal::Def+, Crystal::Type+, Array(LLVM::Value)>:(Bool | LLVM::Value | Nil) at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/call.cr 405:12
+0x13f0852: *Crystal::CodeGenVisitor#visit<Crystal::Call>:Bool at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/call.cr 34:7
+0xbfefff: *Crystal::ASTNode+ at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/syntax/visitor.cr 27:12
+0x13db1e1: *Crystal::CodeGenVisitor#accept<Crystal::ASTNode+>:Nil at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/codegen.cr 1894:7
+0x13f5bba: *Crystal::CodeGenVisitor#prepare_call_args_non_external<Crystal::Call, Crystal::Def+, Crystal::Type+>:Tuple(Array(LLVM::Value), Bool) at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/call.cr 99:7
+0x13f3e25: *Crystal::CodeGenVisitor#prepare_call_args<Crystal::Call, Crystal::Type+>:Tuple(Array(LLVM::Value), Bool) at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/call.cr 56:7
+0x13f077a: *Crystal::CodeGenVisitor#visit<Crystal::Call>:Bool at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/call.cr 21:26
+0xbfefff: *Crystal::ASTNode+ at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/syntax/visitor.cr 27:12
+0x13db1e1: *Crystal::CodeGenVisitor#accept<Crystal::ASTNode+>:Nil at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/codegen.cr 1894:7
+0x140983f: *Crystal::CodeGenVisitor#codegen_if_branch<Crystal::CodeGenVisitor::Phi, Crystal::ASTNode+, LLVM::BasicBlock, Bool>:(LLVM::Value | Nil) at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/codegen.cr 713:7
+0x14088bb: *Crystal::CodeGenVisitor#visit<Crystal::If>:Bool at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/codegen.cr 704:9
+0xbfe856: *Crystal::ASTNode+ at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/syntax/visitor.cr 27:12
+0x13db1e1: *Crystal::CodeGenVisitor#accept<Crystal::ASTNode+>:Nil at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/codegen.cr 1894:7
+0x13e8e09: *Crystal::CodeGenVisitor#visit<Crystal::Expressions>:Bool at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/codegen.cr 547:9
+0xbfe2f2: *Crystal::ASTNode+ at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/syntax/visitor.cr 27:12
+0x13db1e1: *Crystal::CodeGenVisitor#accept<Crystal::ASTNode+>:Nil at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/codegen.cr 1894:7
+0x140e7cd: *Crystal::CodeGenVisitor#visit<Crystal::Yield>:Bool at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/codegen.cr 68:5
+0xbfef7d: *Crystal::ASTNode+ at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/syntax/visitor.cr 27:12
+0x13db1e1: *Crystal::CodeGenVisitor#accept<Crystal::ASTNode+>:Nil at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/codegen.cr 1894:7
+0x14100f9: *Crystal::CodeGenVisitor#visit<Crystal::ExceptionHandler>:Bool at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/exception.cr 88:7
+0xbff05b: *Crystal::ASTNode+ at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/syntax/visitor.cr 27:12
+0x13db1e1: *Crystal::CodeGenVisitor#accept<Crystal::ASTNode+>:Nil at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/codegen.cr 1894:7
+0x13e8e09: *Crystal::CodeGenVisitor#visit<Crystal::Expressions>:Bool at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/codegen.cr 547:9
+0xbfe2f2: *Crystal::ASTNode+ at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/syntax/visitor.cr 27:12
+0x13db1e1: *Crystal::CodeGenVisitor#accept<Crystal::ASTNode+>:Nil at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/codegen.cr 1894:7
+0x13f7b7f: *Crystal::CodeGenVisitor#codegen_call_with_block<Crystal::Call, Crystal::Block, Crystal::Type+, Array(LLVM::Value)>:LLVM::Value at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/call.cr 283:13
+0x13f08b8: *Crystal::CodeGenVisitor#visit<Crystal::Call>:Bool at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/call.cr 31:9
+0xbfefff: *Crystal::ASTNode+ at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/syntax/visitor.cr 27:12
+0x13db1e1: *Crystal::CodeGenVisitor#accept<Crystal::ASTNode+>:Nil at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/codegen.cr 1894:7
+0x13e8e09: *Crystal::CodeGenVisitor#visit<Crystal::Expressions>:Bool at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/codegen.cr 547:9
+0xbfe2f2: *Crystal::ASTNode+ at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/syntax/visitor.cr 27:12
+0x13db1e1: *Crystal::CodeGenVisitor#accept<Crystal::ASTNode+>:Nil at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/codegen.cr 1894:7
+0x140e7cd: *Crystal::CodeGenVisitor#visit<Crystal::Yield>:Bool at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/codegen.cr 68:5
+0xbfef7d: *Crystal::ASTNode+ at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/syntax/visitor.cr 27:12
+0x13db1e1: *Crystal::CodeGenVisitor#accept<Crystal::ASTNode+>:Nil at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/codegen.cr 1894:7
+0x13e8e09: *Crystal::CodeGenVisitor#visit<Crystal::Expressions>:Bool at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/codegen.cr 547:9
+0xbfe2f2: *Crystal::ASTNode+ at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/syntax/visitor.cr 27:12
+0x13db1e1: *Crystal::CodeGenVisitor#accept<Crystal::ASTNode+>:Nil at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/codegen.cr 1894:7
+0x1409c7d: *Crystal::CodeGenVisitor#visit<Crystal::While>:Bool at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/codegen.cr 740:11
+0xbfe8b2: *Crystal::ASTNode+ at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/syntax/visitor.cr 27:12
+0x13db1e1: *Crystal::CodeGenVisitor#accept<Crystal::ASTNode+>:Nil at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/codegen.cr 1894:7
+0x13e8e09: *Crystal::CodeGenVisitor#visit<Crystal::Expressions>:Bool at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/codegen.cr 547:9
+0xbfe2f2: *Crystal::ASTNode+ at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/syntax/visitor.cr 27:12
+0x13db1e1: *Crystal::CodeGenVisitor#accept<Crystal::ASTNode+>:Nil at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/codegen.cr 1894:7
+0x13f7b7f: *Crystal::CodeGenVisitor#codegen_call_with_block<Crystal::Call, Crystal::Block, Crystal::Type+, Array(LLVM::Value)>:LLVM::Value at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/call.cr 283:13
+0x13f08b8: *Crystal::CodeGenVisitor#visit<Crystal::Call>:Bool at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/call.cr 31:9
+0xbfefff: *Crystal::ASTNode+ at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/syntax/visitor.cr 27:12
+0x13db1e1: *Crystal::CodeGenVisitor#accept<Crystal::ASTNode+>:Nil at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/codegen.cr 1894:7
+0x13e8e09: *Crystal::CodeGenVisitor#visit<Crystal::Expressions>:Bool at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/codegen.cr 547:9
+0xbfe2f2: *Crystal::ASTNode+ at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/syntax/visitor.cr 27:12
+0x13db1e1: *Crystal::CodeGenVisitor#accept<Crystal::ASTNode+>:Nil at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/codegen.cr 1894:7
+0x13e4581: *Crystal::CodeGenVisitor#codegen_fun<String, Crystal::Def+, Crystal::Type+, Bool, LLVM::Module, Bool, Bool>:LLVM::Function at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/fun.cr 128:9
+0x13e8c71: *Crystal::CodeGenVisitor#codegen_fun<String, Crystal::Def+, Crystal::Type+>:LLVM::Function at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/fun.cr 48:3
+0x13e883b: *Crystal::CodeGenVisitor#target_def_fun<Crystal::Def+, Crystal::Type+>:LLVM::Function at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/fun.cr 8:54
+0x13f90d8: *Crystal::CodeGenVisitor#codegen_call<Crystal::Call, Crystal::Def+, Crystal::Type+, Array(LLVM::Value)>:(Bool | LLVM::Value | Nil) at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/call.cr 405:12
+0x13f0852: *Crystal::CodeGenVisitor#visit<Crystal::Call>:Bool at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/call.cr 34:7
+0xbfefff: *Crystal::ASTNode+ at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/syntax/visitor.cr 27:12
+0x13db1e1: *Crystal::CodeGenVisitor#accept<Crystal::ASTNode+>:Nil at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/codegen.cr 1894:7
+0x13e8e09: *Crystal::CodeGenVisitor#visit<Crystal::Expressions>:Bool at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/codegen.cr 547:9
+0xbfe2f2: *Crystal::ASTNode+ at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/syntax/visitor.cr 27:12
+0x13db1e1: *Crystal::CodeGenVisitor#accept<Crystal::ASTNode+>:Nil at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/codegen.cr 1894:7
+0x13e4581: *Crystal::CodeGenVisitor#codegen_fun<String, Crystal::Def+, Crystal::Type+, Bool, LLVM::Module, Bool, Bool>:LLVM::Function at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/fun.cr 128:9
+0x13e8c71: *Crystal::CodeGenVisitor#codegen_fun<String, Crystal::Def+, Crystal::Type+>:LLVM::Function at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/fun.cr 48:3
+0x13e883b: *Crystal::CodeGenVisitor#target_def_fun<Crystal::Def+, Crystal::Type+>:LLVM::Function at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/fun.cr 8:54
+0x13f90d8: *Crystal::CodeGenVisitor#codegen_call<Crystal::Call, Crystal::Def+, Crystal::Type+, Array(LLVM::Value)>:(Bool | LLVM::Value | Nil) at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/call.cr 405:12
+0x13f0852: *Crystal::CodeGenVisitor#visit<Crystal::Call>:Bool at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/call.cr 34:7
+0xbfefff: *Crystal::ASTNode+ at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/syntax/visitor.cr 27:12
+0x13db1e1: *Crystal::CodeGenVisitor#accept<Crystal::ASTNode+>:Nil at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/codegen.cr 1894:7
+0x13e9e2e: *Crystal::CodeGenVisitor#codegen_assign<Crystal::ASTNode+, Crystal::ASTNode+, Crystal::Assign>:(Bool | Nil) at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/codegen.cr 875:9
+0x13e98a6: *Crystal::CodeGenVisitor#visit<Crystal::Assign>:(Bool | Nil) at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/codegen.cr 839:7
+0xbfea2c: *Crystal::ASTNode+ at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/syntax/visitor.cr 27:12
+0x13db1e1: *Crystal::CodeGenVisitor#accept<Crystal::ASTNode+>:Nil at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/codegen.cr 1894:7
+0x13e8e09: *Crystal::CodeGenVisitor#visit<Crystal::Expressions>:Bool at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/codegen.cr 547:9
+0xbfe2f2: *Crystal::ASTNode+ at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/syntax/visitor.cr 27:12
+0x13db1e1: *Crystal::CodeGenVisitor#accept<Crystal::ASTNode+>:Nil at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/codegen.cr 1894:7
+0x14100f9: *Crystal::CodeGenVisitor#visit<Crystal::ExceptionHandler>:Bool at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/exception.cr 88:7
+0xbff05b: *Crystal::ASTNode+ at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/syntax/visitor.cr 27:12
+0x13db1e1: *Crystal::CodeGenVisitor#accept<Crystal::ASTNode+>:Nil at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/codegen.cr 1894:7
+0x140e7cd: *Crystal::CodeGenVisitor#visit<Crystal::Yield>:Bool at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/codegen.cr 68:5
+0xbfef7d: *Crystal::ASTNode+ at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/syntax/visitor.cr 27:12
+0x13db1e1: *Crystal::CodeGenVisitor#accept<Crystal::ASTNode+>:Nil at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/codegen.cr 1894:7
+0x14100f9: *Crystal::CodeGenVisitor#visit<Crystal::ExceptionHandler>:Bool at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/exception.cr 88:7
+0xbff05b: *Crystal::ASTNode+ at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/syntax/visitor.cr 27:12
+0x13db1e1: *Crystal::CodeGenVisitor#accept<Crystal::ASTNode+>:Nil at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/codegen.cr 1894:7
+0x13f7b7f: *Crystal::CodeGenVisitor#codegen_call_with_block<Crystal::Call, Crystal::Block, Crystal::Type+, Array(LLVM::Value)>:LLVM::Value at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/call.cr 283:13
+0x13f08b8: *Crystal::CodeGenVisitor#visit<Crystal::Call>:Bool at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/call.cr 31:9
+0xbfefff: *Crystal::ASTNode+ at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/syntax/visitor.cr 27:12
+0x13db1e1: *Crystal::CodeGenVisitor#accept<Crystal::ASTNode+>:Nil at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/codegen.cr 1894:7
+0x140e7cd: *Crystal::CodeGenVisitor#visit<Crystal::Yield>:Bool at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/codegen.cr 68:5
+0xbfef7d: *Crystal::ASTNode+ at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/syntax/visitor.cr 27:12
+0x13db1e1: *Crystal::CodeGenVisitor#accept<Crystal::ASTNode+>:Nil at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/codegen.cr 1894:7
+0x140983f: *Crystal::CodeGenVisitor#codegen_if_branch<Crystal::CodeGenVisitor::Phi, Crystal::ASTNode+, LLVM::BasicBlock, Bool>:(LLVM::Value | Nil) at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/codegen.cr 713:7
+0x14088bb: *Crystal::CodeGenVisitor#visit<Crystal::If>:Bool at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/codegen.cr 704:9
+0xbfe856: *Crystal::ASTNode+ at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/syntax/visitor.cr 27:12
+0x13db1e1: *Crystal::CodeGenVisitor#accept<Crystal::ASTNode+>:Nil at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/codegen.cr 1894:7
+0x13f7b7f: *Crystal::CodeGenVisitor#codegen_call_with_block<Crystal::Call, Crystal::Block, Crystal::Type+, Array(LLVM::Value)>:LLVM::Value at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/call.cr 283:13
+0x13f08b8: *Crystal::CodeGenVisitor#visit<Crystal::Call>:Bool at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/call.cr 31:9
+0xbfefff: *Crystal::ASTNode+ at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/syntax/visitor.cr 27:12
+0x13db1e1: *Crystal::CodeGenVisitor#accept<Crystal::ASTNode+>:Nil at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/codegen.cr 1894:7
+0x13e8e09: *Crystal::CodeGenVisitor#visit<Crystal::Expressions>:Bool at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/codegen.cr 547:9
+0xbfe2f2: *Crystal::ASTNode+ at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/syntax/visitor.cr 27:12
+0x13db1e1: *Crystal::CodeGenVisitor#accept<Crystal::ASTNode+>:Nil at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/codegen.cr 1894:7
+0x13f7b7f: *Crystal::CodeGenVisitor#codegen_call_with_block<Crystal::Call, Crystal::Block, Crystal::Type+, Array(LLVM::Value)>:LLVM::Value at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/call.cr 283:13
+0x13f08b8: *Crystal::CodeGenVisitor#visit<Crystal::Call>:Bool at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/call.cr 31:9
+0xbfefff: *Crystal::ASTNode+ at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/syntax/visitor.cr 27:12
+0x13db1e1: *Crystal::CodeGenVisitor#accept<Crystal::ASTNode+>:Nil at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/codegen.cr 1894:7
+0x13e4581: *Crystal::CodeGenVisitor#codegen_fun<String, Crystal::Def+, Crystal::Type+, Bool, LLVM::Module, Bool, Bool>:LLVM::Function at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/fun.cr 128:9
+0x13e8c71: *Crystal::CodeGenVisitor#codegen_fun<String, Crystal::Def+, Crystal::Type+>:LLVM::Function at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/fun.cr 48:3
+0x13e883b: *Crystal::CodeGenVisitor#target_def_fun<Crystal::Def+, Crystal::Type+>:LLVM::Function at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/fun.cr 8:54
+0x13f90d8: *Crystal::CodeGenVisitor#codegen_call<Crystal::Call, Crystal::Def+, Crystal::Type+, Array(LLVM::Value)>:(Bool | LLVM::Value | Nil) at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/call.cr 405:12
+0x13f0852: *Crystal::CodeGenVisitor#visit<Crystal::Call>:Bool at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/call.cr 34:7
+0xbfefff: *Crystal::ASTNode+ at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/syntax/visitor.cr 27:12
+0x13db1e1: *Crystal::CodeGenVisitor#accept<Crystal::ASTNode+>:Nil at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/codegen.cr 1894:7
+0x13e4581: *Crystal::CodeGenVisitor#codegen_fun<String, Crystal::Def+, Crystal::Type+, Bool, LLVM::Module, Bool, Bool>:LLVM::Function at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/fun.cr 128:9
+0x13e3b0f: *Crystal::CodeGenVisitor#codegen_fun:fun_module:is_fun_literal:is_closure<String, Crystal::Def+, Crystal::Type+, LLVM::Module, Bool, Bool>:LLVM::Function at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/fun.cr 48:3
+0x13e344b: *Crystal::CodeGenVisitor#visit<Crystal::ProcLiteral>:Bool at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/codegen.cr 478:17
+0xbfe23a: *Crystal::ASTNode+ at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/syntax/visitor.cr 27:12
+0x13db1e1: *Crystal::CodeGenVisitor#accept<Crystal::ASTNode+>:Nil at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/codegen.cr 1894:7
+0x13f5bba: *Crystal::CodeGenVisitor#prepare_call_args_non_external<Crystal::Call, Crystal::Def+, Crystal::Type+>:Tuple(Array(LLVM::Value), Bool) at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/call.cr 99:7
+0x13f3e25: *Crystal::CodeGenVisitor#prepare_call_args<Crystal::Call, Crystal::Type+>:Tuple(Array(LLVM::Value), Bool) at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/call.cr 56:7
+0x13f077a: *Crystal::CodeGenVisitor#visit<Crystal::Call>:Bool at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/call.cr 21:26
+0xbfefff: *Crystal::ASTNode+ at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/syntax/visitor.cr 27:12
+0x13db1e1: *Crystal::CodeGenVisitor#accept<Crystal::ASTNode+>:Nil at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/codegen.cr 1894:7
+0x13e8e09: *Crystal::CodeGenVisitor#visit<Crystal::Expressions>:Bool at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/codegen.cr 547:9
+0xbfe2f2: *Crystal::ASTNode+ at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/syntax/visitor.cr 27:12
+0x13db1e1: *Crystal::CodeGenVisitor#accept<Crystal::ASTNode+>:Nil at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/codegen.cr 1894:7
+0x13e9496: *Crystal::CodeGenVisitor#visit<Crystal::ClassDef>:Bool at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/codegen.cr 599:15
+0xbfe3aa: *Crystal::ASTNode+ at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/syntax/visitor.cr 27:12
+0x13db1e1: *Crystal::CodeGenVisitor#accept<Crystal::ASTNode+>:Nil at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/codegen.cr 1894:7
+0x13e8e09: *Crystal::CodeGenVisitor#visit<Crystal::Expressions>:Bool at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/codegen.cr 547:9
+0xbfe2f2: *Crystal::ASTNode+ at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/syntax/visitor.cr 27:12
+0x13e950f: *Crystal::CodeGenVisitor#visit<Crystal::ClassDef>:Bool at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/codegen.cr 597:41
+0xbfe3aa: *Crystal::ASTNode+ at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/syntax/visitor.cr 27:12
+0x13db1e1: *Crystal::CodeGenVisitor#accept<Crystal::ASTNode+>:Nil at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/codegen.cr 1894:7
+0x13e9496: *Crystal::CodeGenVisitor#visit<Crystal::ClassDef>:Bool at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/codegen.cr 599:15
+0xbfe3aa: *Crystal::ASTNode+ at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/syntax/visitor.cr 27:12
+0x13db1e1: *Crystal::CodeGenVisitor#accept<Crystal::ASTNode+>:Nil at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/codegen.cr 1894:7
+0x13e954f: *Crystal::CodeGenVisitor#visit<Crystal::ModuleDef>:Bool at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/codegen.cr 605:15
+0xbfe406: *Crystal::ASTNode+ at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/syntax/visitor.cr 27:12
+0x13db1e1: *Crystal::CodeGenVisitor#accept<Crystal::ASTNode+>:Nil at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/codegen.cr 1894:7
+0x13e8e09: *Crystal::CodeGenVisitor#visit<Crystal::Expressions>:Bool at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/codegen.cr 547:9
+0xbfe2f2: *Crystal::ASTNode+ at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/syntax/visitor.cr 27:12
+0x13db2d6: *Crystal::CodeGenVisitor#visit<Crystal::FileNode>:Bool at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/codegen.cr 355:17
+0xbfde1a: *Crystal::ASTNode+ at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/syntax/visitor.cr 27:12
+0x13db1e1: *Crystal::CodeGenVisitor#accept<Crystal::ASTNode+>:Nil at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/codegen.cr 1894:7
+0x13e8e09: *Crystal::CodeGenVisitor#visit<Crystal::Expressions>:Bool at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/codegen.cr 547:9
+0xbfe2f2: *Crystal::ASTNode+ at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/syntax/visitor.cr 27:12
+0x13db2d6: *Crystal::CodeGenVisitor#visit<Crystal::FileNode>:Bool at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/codegen.cr 355:17
+0xbfde1a: *Crystal::ASTNode+ at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/syntax/visitor.cr 27:12
+0x13db1e1: *Crystal::CodeGenVisitor#accept<Crystal::ASTNode+>:Nil at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/codegen.cr 1894:7
+0x13e8e09: *Crystal::CodeGenVisitor#visit<Crystal::Expressions>:Bool at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/codegen.cr 547:9
+0xbfe2f2: *Crystal::ASTNode+ at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/syntax/visitor.cr 27:12
+0x8ac150: *Crystal::Program#codegen<Crystal::ASTNode+, (Array(String) | Bool | Nil), Crystal::Debug, LLVM::Module, Bool>:Hash(String, LLVM::Module)+ at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/codegen.cr 63:7
+0x8ac0c6: *Crystal::Program#codegen:debug:single_module:expose_crystal_main<Crystal::ASTNode+, Crystal::Debug, (Array(String) | Bool | Nil), Bool>:Hash(String, LLVM::Module)+ at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/codegen/codegen.cr 61:5
+0x100d74c: *Crystal::Compiler#codegen<Crystal::Program, Crystal::ASTNode+, Array(Crystal::Compiler::Source), String>:Nil at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/compiler.cr 222:9
+0x100ab65: *Crystal::Compiler#compile<Array(Crystal::Compiler::Source), String>:Crystal::Compiler::Result at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/compiler.cr 138:7
+0x1011589: *Crystal::Command::CompilerConfig#compile<String>:Crystal::Compiler::Result at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/command.cr 259:7
+0x870ced: *Crystal::Command#run_command<Bool>:Nil at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/command.cr 194:14
+0x86cda7: *Crystal::Command#run:(Bool | Crystal::Compiler::Result | IO::FileDescriptor | Nil) at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/command.cr 105:11
+0x86c4ab: *Crystal::Command::run<Array(String)>:(Bool | Crystal::Compiler::Result | IO::FileDescriptor | Nil) at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/command.cr 49:5
+0x86c469: *Crystal::Command::run:(Bool | Crystal::Compiler::Result | IO::FileDescriptor | Nil) at /home/arnaud/workspace/repos/crystal/src/compiler/crystal/command.cr 48:3
+0x739cc4: ??? at /home/arnaud/workspace/repos/crystal/src/compiler/crystal.cr 8:1
+0x7488d9: main at /home/arnaud/.cache/crystal/macro48752800.cr 12:15
+0x7f66f0006291: __libc_start_main at ??
+0x738e2a: _start at ??
+0x0: ??? at ??
+

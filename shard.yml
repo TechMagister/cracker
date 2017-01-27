@@ -15,5 +15,3 @@ license: MIT
 dependencies:
   cli:
     github: mosop/cli
-  msgpack:
-    github: benoist/msgpack-crystal

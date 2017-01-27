@@ -1,11 +1,10 @@
 require "cli"
 
-module Cracker::Commands
-  class Cracker < Cli::Supercommand
+module ::Cracker::Commands
+  class Main < Cli::Supercommand
     class Server < Cli::Command
       class Help
         header "Auto completion server for the crystal language"
-        footer "(C) 2016 Ghilde Sud"
       end
 
       class Options
