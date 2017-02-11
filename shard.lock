@@ -2,19 +2,15 @@ version: 1.0
 shards:
   callback:
     github: mosop/callback
-    version: 0.5.0.1
+    version: 0.6.2
 
   cli:
     github: mosop/cli
-    version: 0.5.1.5
-
-  msgpack:
-    github: benoist/msgpack-crystal
-    commit: 8ecde2ede883510e784ccb47762ef95a53640c15
+    version: 0.6.5
 
   optarg:
     github: mosop/optarg
-    version: 0.4.2.9
+    version: 0.5.5
 
   string_inflection:
     github: mosop/string_inflection

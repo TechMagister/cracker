@@ -2,18 +2,16 @@ name: cracker
 version: 0.1.0
 
 authors:
-  - Arnaud Fernandés <arnaud.fernandes@laposte.net>
+  - Arnaud Fernandés <arnaud.fernandes@tech-magister.com>
 
 targets:
   cracker:
     main: src/cracker.cr
 
-crystal: 0.20.1+68
+crystal: 0.20.5+70
 
 license: MIT
 
 dependencies:
   cli:
     github: mosop/cli
-  msgpack:
-    github: benoist/msgpack-crystal
