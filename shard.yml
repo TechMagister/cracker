@@ -14,4 +14,4 @@ license: MIT
 
 dependencies:
   cli:
-    github: mosop/cli
+    github: amberframework/cli
